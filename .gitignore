@@ -1,0 +1,49 @@
+# Derleme çıktıları
+bin/
+obj/
+publish/
+artifacts/
+*.pdb
+
+# Visual Studio / IDE
+.vs/
+.idea/
+.vscode/
+*.user
+*.suo
+*.rsuser
+*.iml
+*.sln.docstates
+*.ntvs*
+*.njsproj
+
+# Test ve kapsam raporları
+TestResults/
+coverage.*
+*.trx
+
+# NuGet
+*.nupkg
+*.snupkg
+[Pp]ackages/
+
+# DiskScope taşınabilir uygulama verisi (ayarlar, günlükler, önbellek)
+/Data/
+**/Data/Logs/
+settings.json
+
+# Yedek ve geçici dosyalar
+*.bak
+*.tmp
+*.temp
+*.log
+
+# Yerel ortam
+.env
+env
+
+# İşletim sistemi
+[Dd]esktop.ini
+~$*
+.DS_Store
+Thumbs.db

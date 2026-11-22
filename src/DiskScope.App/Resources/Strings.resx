@@ -1,0 +1,32 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <resheader name="resmimetype"><value>text/microsoft-resx</value></resheader>
+  <resheader name="version"><value>2.0</value></resheader>
+  <resheader name="reader"><value>System.Resources.ResXResourceReader, System.Windows.Forms</value></resheader>
+  <resheader name="writer"><value>System.Resources.ResXResourceWriter, System.Windows.Forms</value></resheader>
+
+  <data name="AppTitle" xml:space="preserve"><value>DiskScope</value></data>
+
+  <data name="Workspace" xml:space="preserve"><value>ÇALIŞMA ALANI</value></data>
+  <data name="NavigationOverview" xml:space="preserve"><value>Genel Bakış</value></data>
+  <data name="NavigationAnalyzer" xml:space="preserve"><value>Disk Analizi</value></data>
+  <data name="NavigationLargeFiles" xml:space="preserve"><value>Büyük Dosyalar</value></data>
+  <data name="NavigationFileTypes" xml:space="preserve"><value>Dosya Türleri</value></data>
+  <data name="NavigationSettings" xml:space="preserve"><value>Ayarlar</value></data>
+
+  <data name="OverviewDescription" xml:space="preserve"><value>Depolama alanınızı tek bakışta takip edin.</value></data>
+  <data name="StorageOverview" xml:space="preserve"><value>Depolama Özeti</value></data>
+  <data name="DetectedDrives" xml:space="preserve"><value>Algılanan diskleriniz burada görüntülenecek.</value></data>
+
+  <data name="CommonRefresh" xml:space="preserve"><value>Yenile</value></data>
+  <data name="CommonCancel" xml:space="preserve"><value>İptal</value></data>
+
+  <data name="DiskMediaSsd" xml:space="preserve"><value>SSD</value></data>
+  <data name="DiskMediaHdd" xml:space="preserve"><value>HDD</value></data>
+  <data name="DiskMediaNvme" xml:space="preserve"><value>NVMe</value></data>
+  <data name="DiskMediaUnknown" xml:space="preserve"><value>Bilinmiyor</value></data>
+  <data name="DiskLabelUsed" xml:space="preserve"><value>Kullanılan:</value></data>
+  <data name="DiskLabelFree" xml:space="preserve"><value>Boş alan:</value></data>
+  <data name="ErrorUnexpectedTitle" xml:space="preserve"><value>Beklenmeyen hata</value></data>
+  <data name="ErrorUnexpectedBody" xml:space="preserve"><value>Bir hata oluştu ve kayıt dosyasına yazıldı. Uygulama çalışmaya devam edecek.</value></data>
+</root>

@@ -1,0 +1,70 @@
+name: Release
+
+# "v0.1.0" gibi bir etiket (tag) gönderildiğinde çalışır.
+on:
+  push:
+    tags:
+      - "v*.*.*"
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    runs-on: windows-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v4
+        with:
+          global-json-file: global.json
+
+      - name: Get version from tag
+        id: version
+        shell: pwsh
+        run: |
+          $tag = "${{ github.ref_name }}"
+          $version = $tag.TrimStart('v')
+          "tag=$tag" | Out-File -FilePath $env:GITHUB_OUTPUT -Append
+          "version=$version" | Out-File -FilePath $env:GITHUB_OUTPUT -Append
+
+      - name: Restore
+        run: dotnet restore DiskScope.sln
+
+      - name: Build
+        run: dotnet build DiskScope.sln --no-restore --configuration Release -p:Version=${{ steps.version.outputs.version }}
+
+      - name: Test
+        run: dotnet test DiskScope.sln --no-build --configuration Release
+
+      - name: Publish (win-x64, self-contained, single file)
+        run: >
+          dotnet publish src/DiskScope.App/DiskScope.App.csproj
+          --configuration Release
+          --runtime win-x64
+          --self-contained true
+          -p:PublishSingleFile=true
+          -p:IncludeNativeLibrariesForSelfExtract=true
+          -p:Version=${{ steps.version.outputs.version }}
+          --output publish
+
+      - name: Create portable zip and checksum
+        shell: pwsh
+        run: |
+          $zip = "DiskScope-${{ steps.version.outputs.tag }}-win-x64-portable.zip"
+          Compress-Archive -Path publish\* -DestinationPath $zip
+          $hash = (Get-FileHash $zip -Algorithm SHA256).Hash.ToLower()
+          "$hash  $zip" | Out-File -FilePath "$zip.sha256" -Encoding ascii
+          "ZIP_NAME=$zip" | Out-File -FilePath $env:GITHUB_ENV -Append
+
+      - name: Create GitHub release
+        uses: softprops/action-gh-release@v2
+        with:
+          files: |
+            ${{ env.ZIP_NAME }}
+            ${{ env.ZIP_NAME }}.sha256
+          generate_release_notes: true
+          prerelease: ${{ contains(steps.version.outputs.version, '-') }}

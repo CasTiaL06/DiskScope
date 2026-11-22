@@ -1,0 +1,32 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <resheader name="resmimetype"><value>text/microsoft-resx</value></resheader>
+  <resheader name="version"><value>2.0</value></resheader>
+  <resheader name="reader"><value>System.Resources.ResXResourceReader, System.Windows.Forms</value></resheader>
+  <resheader name="writer"><value>System.Resources.ResXResourceWriter, System.Windows.Forms</value></resheader>
+
+  <data name="AppTitle" xml:space="preserve"><value>DiskScope</value></data>
+
+  <data name="Workspace" xml:space="preserve"><value>WORKSPACE</value></data>
+  <data name="NavigationOverview" xml:space="preserve"><value>Overview</value></data>
+  <data name="NavigationAnalyzer" xml:space="preserve"><value>Disk Analysis</value></data>
+  <data name="NavigationLargeFiles" xml:space="preserve"><value>Large Files</value></data>
+  <data name="NavigationFileTypes" xml:space="preserve"><value>File Types</value></data>
+  <data name="NavigationSettings" xml:space="preserve"><value>Settings</value></data>
+
+  <data name="OverviewDescription" xml:space="preserve"><value>Monitor your storage at a glance.</value></data>
+  <data name="StorageOverview" xml:space="preserve"><value>Storage Overview</value></data>
+  <data name="DetectedDrives" xml:space="preserve"><value>Your detected drives will appear here.</value></data>
+
+  <data name="CommonRefresh" xml:space="preserve"><value>Refresh</value></data>
+  <data name="CommonCancel" xml:space="preserve"><value>Cancel</value></data>
+
+  <data name="DiskMediaSsd" xml:space="preserve"><value>SSD</value></data>
+  <data name="DiskMediaHdd" xml:space="preserve"><value>HDD</value></data>
+  <data name="DiskMediaNvme" xml:space="preserve"><value>NVMe</value></data>
+  <data name="DiskMediaUnknown" xml:space="preserve"><value>Unknown</value></data>
+  <data name="DiskLabelUsed" xml:space="preserve"><value>Used:</value></data>
+  <data name="DiskLabelFree" xml:space="preserve"><value>Free:</value></data>
+  <data name="ErrorUnexpectedTitle" xml:space="preserve"><value>Unexpected error</value></data>
+  <data name="ErrorUnexpectedBody" xml:space="preserve"><value>An error occurred and was written to the log file. The application will keep running.</value></data>
+</root>

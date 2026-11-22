@@ -1,0 +1,14 @@
+# Satır sonlarını Git yönetsin (Windows'ta CRLF, depoda LF)
+* text=auto
+
+*.sln text eol=crlf
+*.cs text diff=csharp
+*.csproj text
+*.xaml text
+*.resx text
+*.md text
+*.yml text
+
+*.png binary
+*.ico binary
+*.zip binary

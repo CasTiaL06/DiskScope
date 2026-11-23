@@ -1,3 +1,5 @@
+using System.IO;
+
 namespace DiskScope.App.Helpers;
 
 internal static class DriveHelper

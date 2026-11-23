@@ -47,3 +47,6 @@ env
 ~$*
 .DS_Store
 Thumbs.db
+
+# Derlenmis uygulamalar (surumler GitHub Releases'ten dagitilir)
+*.exe

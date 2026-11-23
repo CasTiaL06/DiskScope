@@ -1,4 +1,4 @@
-# DiskScope
+﻿# DiskScope
 
 **TR:** Windows için geliştirilen, taşınabilir (portable) bir disk ve depolama alanı analiz uygulaması.
 **EN:** A portable disk and storage analyzer for Windows.
@@ -6,7 +6,7 @@
 > **Durum / Status:** Erken geliştirme aşaması (v0.x). Genel Bakış ve Disk Analizi (treemap) çalışıyor; yinelenen dosyalar, temizlik merkezi ve diğer modüller yol haritasında.
 > Early development (v0.x). Overview and Disk Analyzer (treemap) work; duplicate finder, cleanup center and other modules are on the roadmap.
 
-[![CI](https://github.com/KULLANICI_ADIN/DiskScope/actions/workflows/ci.yml/badge.svg)](https://github.com/KULLANICI_ADIN/DiskScope/actions/workflows/ci.yml)
+[![CI](https://github.com/CasTiaL06/DiskScope/actions/workflows/ci.yml/badge.svg)](https://github.com/CasTiaL06/DiskScope/actions/workflows/ci.yml)
 
 ## Özellikler (şu an) / Features (current)
 

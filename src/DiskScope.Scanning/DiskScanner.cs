@@ -46,6 +46,8 @@ public sealed class DiskScanner
 
                     MediaType = mediaType,
 
+                    FileSystem = drive.DriveFormat,
+
                     TotalSize = drive.TotalSize,
 
                     AvailableFreeSpace = drive.AvailableFreeSpace

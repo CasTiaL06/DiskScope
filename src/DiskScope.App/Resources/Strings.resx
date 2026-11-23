@@ -29,4 +29,59 @@
   <data name="DiskLabelFree" xml:space="preserve"><value>Boş alan:</value></data>
   <data name="ErrorUnexpectedTitle" xml:space="preserve"><value>Beklenmeyen hata</value></data>
   <data name="ErrorUnexpectedBody" xml:space="preserve"><value>Bir hata oluştu ve kayıt dosyasına yazıldı. Uygulama çalışmaya devam edecek.</value></data>
+  <data name="ActionAnalyze" xml:space="preserve"><value>Analiz et</value></data>
+  <data name="ActionAnalyzeFolder" xml:space="preserve"><value>Klasör analiz et</value></data>
+  <data name="ActionChooseDisk" xml:space="preserve"><value>Disk seç</value></data>
+  <data name="OverviewEmpty" xml:space="preserve"><value>Algılanan disk bulunamadı.</value></data>
+  <data name="OverviewSummary" xml:space="preserve"><value>{0} disk · {1} toplam · {2} boş</value></data>
+  <data name="DiskUsedShort" xml:space="preserve"><value>Kullanılan</value></data>
+  <data name="DiskFreeShort" xml:space="preserve"><value>Boş</value></data>
+  <data name="DiskTotalShort" xml:space="preserve"><value>Toplam</value></data>
+  <data name="ToolUp" xml:space="preserve"><value>Üst klasör</value></data>
+  <data name="ToolRescan" xml:space="preserve"><value>Yeniden tara</value></data>
+  <data name="ToolPickFolder" xml:space="preserve"><value>Klasör seç</value></data>
+  <data name="EmptyTitle" xml:space="preserve"><value>Henüz bir analiz yok</value></data>
+  <data name="EmptyBody" xml:space="preserve"><value>Genel Bakış'tan bir disk seçin veya bir klasör belirleyin. Sonuçlar gerçek dosya sistemi verilerinden hesaplanır.</value></data>
+  <data name="ScanCancelledBody" xml:space="preserve"><value>Tarama iptal edildi.</value></data>
+  <data name="ScanFailedBody" xml:space="preserve"><value>Tarama tamamlanamadı: {0}</value></data>
+  <data name="ScanningTitle" xml:space="preserve"><value>Taranıyor…</value></data>
+  <data name="StatusScanning" xml:space="preserve"><value>Taranıyor: {0}</value></data>
+  <data name="StatusDone" xml:space="preserve"><value>Tarama tamamlandı</value></data>
+  <data name="StatElapsed" xml:space="preserve"><value>Geçen süre: {0}</value></data>
+  <data name="StatFiles" xml:space="preserve"><value>Dosya: {0:N0}</value></data>
+  <data name="StatFolders" xml:space="preserve"><value>Klasör: {0:N0}</value></data>
+  <data name="StatSize" xml:space="preserve"><value>Boyut: {0}</value></data>
+  <data name="StatSkipped" xml:space="preserve"><value>Atlanan: {0:N0}</value></data>
+  <data name="SkippedTitle" xml:space="preserve"><value>Atlanan öğeler</value></data>
+  <data name="SkippedMore" xml:space="preserve"><value>… ve {0:N0} öğe daha</value></data>
+  <data name="IssueAccessDenied" xml:space="preserve"><value>Erişim reddedildi</value></data>
+  <data name="IssueIoError" xml:space="preserve"><value>Okunamadı</value></data>
+  <data name="IssueSkippedLink" xml:space="preserve"><value>Bağlantı klasörü atlandı</value></data>
+  <data name="ColumnName" xml:space="preserve"><value>Ad</value></data>
+  <data name="ColumnSize" xml:space="preserve"><value>Boyut</value></data>
+  <data name="ColumnShare" xml:space="preserve"><value>Pay</value></data>
+  <data name="ListInfo" xml:space="preserve"><value>{0:N0} öğe · {1}</value></data>
+  <data name="PanelSummary" xml:space="preserve"><value>Özet</value></data>
+  <data name="PanelFileTypes" xml:space="preserve"><value>Dosya türleri</value></data>
+  <data name="PanelExtensions" xml:space="preserve"><value>Uzantılar</value></data>
+  <data name="SummarySize" xml:space="preserve"><value>Toplam boyut</value></data>
+  <data name="SummaryFiles" xml:space="preserve"><value>Dosya</value></data>
+  <data name="SummaryFolders" xml:space="preserve"><value>Klasör</value></data>
+  <data name="SummaryTime" xml:space="preserve"><value>Süre</value></data>
+  <data name="NoExtension" xml:space="preserve"><value>(uzantısız)</value></data>
+  <data name="SmallFilesGroupFormat" xml:space="preserve"><value>Küçük dosyalar ({0:N0})</value></data>
+  <data name="DetailFolder" xml:space="preserve"><value>{0} · {1:0.0}% · {2:N0} dosya</value></data>
+  <data name="DetailFile" xml:space="preserve"><value>{0} · {1:0.0}% · {2}</value></data>
+  <data name="ContextOpenFolder" xml:space="preserve"><value>Klasörü aç</value></data>
+  <data name="ContextOpenExplorer" xml:space="preserve"><value>Explorer'da göster</value></data>
+  <data name="ContextCopyPath" xml:space="preserve"><value>Yolu kopyala</value></data>
+  <data name="CategoryVideo" xml:space="preserve"><value>Videolar</value></data>
+  <data name="CategoryImage" xml:space="preserve"><value>Görseller</value></data>
+  <data name="CategoryAudio" xml:space="preserve"><value>Ses</value></data>
+  <data name="CategoryDocument" xml:space="preserve"><value>Belgeler</value></data>
+  <data name="CategoryArchive" xml:space="preserve"><value>Arşivler</value></data>
+  <data name="CategoryApplication" xml:space="preserve"><value>Uygulamalar</value></data>
+  <data name="CategorySystem" xml:space="preserve"><value>Sistem dosyaları</value></data>
+  <data name="CategoryDiskImage" xml:space="preserve"><value>Disk görüntüleri</value></data>
+  <data name="CategoryOther" xml:space="preserve"><value>Diğer</value></data>
 </root>

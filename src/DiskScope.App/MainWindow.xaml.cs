@@ -1,55 +1,44 @@
-﻿using System.Globalization;
+using System.Globalization;
 using System.Windows;
-using DiskScope.Scanning;
+using DiskScope.App.Helpers;
+using DiskScope.App.Views;
 using Serilog;
 
 namespace DiskScope.App;
 
 public partial class MainWindow : Window
 {
-    private readonly DiskScanner _scanner = new();
-
-    private bool _isLoadingDisks;
-
     public MainWindow()
     {
         InitializeComponent();
 
-        Loaded += async (_, _) => await LoadDisksAsync();
+        SourceInitialized += (_, _) => DarkTitleBar.Apply(this);
+
+        Overview.AnalyzeRequested += async (_, e) => await AnalyzeAsync(e.Path, e.ExpectedBytes);
+        Analyzer.ChooseDiskRequested += (_, _) => NavOverview.IsChecked = true;
+
+        // Olay bağlantıları hazır olduktan sonra ilk sayfayı seç.
+        NavOverview.IsChecked = true;
     }
 
-    private async Task LoadDisksAsync()
+    private async Task AnalyzeAsync(string path, long? expectedBytes)
     {
-        // Aynı anda iki yenileme başlamasın.
-        if (_isLoadingDisks)
-        {
-            return;
-        }
-
-        _isLoadingDisks = true;
-        RefreshButton.IsEnabled = false;
-
         try
         {
-            // Disk bilgileri arka planda okunur; böylece pencere donmaz.
-            var disks = await Task.Run(() => _scanner.GetDisks());
+            NavAnalyzer.IsChecked = true;
 
-            DrivesList.ItemsSource = disks;
+            await Analyzer.StartScanAsync(path, expectedBytes);
         }
         catch (Exception ex)
         {
-            Log.Error(ex, "Disk listesi okunamadı.");
-        }
-        finally
-        {
-            _isLoadingDisks = false;
-            RefreshButton.IsEnabled = true;
+            Log.Error(ex, "Analiz başlatılamadı: {Path}", path);
         }
     }
 
-    private async void RefreshButton_Click(object sender, RoutedEventArgs e)
+    private void Nav_Checked(object sender, RoutedEventArgs e)
     {
-        await LoadDisksAsync();
+        Overview.Visibility = NavOverview.IsChecked == true ? Visibility.Visible : Visibility.Collapsed;
+        Analyzer.Visibility = NavAnalyzer.IsChecked == true ? Visibility.Visible : Visibility.Collapsed;
     }
 
     private async void LanguageToggle_Click(object sender, RoutedEventArgs e)

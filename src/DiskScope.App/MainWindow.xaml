@@ -1,227 +1,87 @@
-﻿
 <Window x:Class="DiskScope.App.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:loc="clr-namespace:DiskScope.App.Localization"
+        xmlns:views="clr-namespace:DiskScope.App.Views"
         Title="{loc:Tr Key=AppTitle}"
-        Width="1200"
-        Height="760"
-        MinWidth="900"
-        MinHeight="600"
+        Width="1360"
+        Height="820"
+        MinWidth="1120"
+        MinHeight="680"
+        WindowStartupLocation="CenterScreen"
         Background="{StaticResource Surface0Brush}"
         Foreground="{StaticResource TextPrimaryBrush}"
-        WindowStartupLocation="CenterScreen">
+        FontFamily="Segoe UI Variable Text, Segoe UI">
 
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="230" />
+            <ColumnDefinition Width="220" />
             <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
 
         <!-- Sidebar -->
-        <Border Grid.Column="0"
-                Background="{StaticResource Surface1Brush}"
+        <Border Background="{StaticResource Surface1Brush}"
                 BorderBrush="{StaticResource BorderBrush}"
                 BorderThickness="0,0,1,0">
-
             <Grid>
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="80" />
+                    <RowDefinition Height="Auto" />
                     <RowDefinition Height="*" />
                     <RowDefinition Height="Auto" />
                 </Grid.RowDefinitions>
 
-                <TextBlock Grid.Row="0"
-                           Text="DiskScope"
-                           FontSize="24"
-                           FontWeight="Bold"
-                           Foreground="{StaticResource AccentBrush}"
-                           VerticalAlignment="Center"
-                           Margin="24,0" />
+                <!-- Logo -->
+                <StackPanel Orientation="Horizontal" Margin="20,24,20,20">
+                    <Border Width="30" Height="30" CornerRadius="8"
+                            Background="{StaticResource AccentBrush}">
+                        <TextBlock Text="&#xEDA2;"
+                                   FontFamily="{StaticResource IconFont}"
+                                   FontSize="15"
+                                   Foreground="#FF0E1315"
+                                   HorizontalAlignment="Center"
+                                   VerticalAlignment="Center" />
+                    </Border>
 
-                <StackPanel Grid.Row="1"
-                            Margin="12,16">
-
-                    <TextBlock Text="{loc:Tr Key=Workspace}"
-                               Foreground="{StaticResource TextDisabledBrush}"
-                               FontSize="11"
+                    <TextBlock Text="DiskScope"
+                               FontFamily="Segoe UI Variable Display, Segoe UI"
+                               FontSize="18"
                                FontWeight="SemiBold"
-                               Margin="12,8,0,12" />
-
-                    <Button Content="{loc:Tr Key=NavigationOverview}"
-                            Style="{StaticResource PrimaryButton}"
-                            HorizontalContentAlignment="Left"
-                            Margin="0,0,0,8" />
-
-                    <Button Content="{loc:Tr Key=NavigationAnalyzer}"
-                            Style="{StaticResource GhostButton}"
-                            HorizontalContentAlignment="Left"
-                            Margin="0,0,0,8" />
-
+                               Foreground="{StaticResource TextPrimaryBrush}"
+                               VerticalAlignment="Center"
+                               Margin="12,0,0,0" />
                 </StackPanel>
 
+                <!-- Navigation -->
+                <StackPanel Grid.Row="1" Margin="12,4,12,0">
+                    <RadioButton x:Name="NavOverview"
+                                 GroupName="Nav"
+                                 Style="{StaticResource NavButton}"
+                                 Tag="&#xE80F;"
+                                 Content="{loc:Tr Key=NavigationOverview}"
+                                 Checked="Nav_Checked" />
+
+                    <RadioButton x:Name="NavAnalyzer"
+                                 GroupName="Nav"
+                                 Style="{StaticResource NavButton}"
+                                 Tag="&#xE721;"
+                                 Content="{loc:Tr Key=NavigationAnalyzer}"
+                                 Checked="Nav_Checked" />
+                </StackPanel>
+
+                <!-- Language -->
                 <Button Grid.Row="2"
-                        Content="{loc:Tr Key=NavigationSettings}"
-                        Style="{StaticResource GhostButton}"
-                        HorizontalContentAlignment="Left"
-                        Margin="12,12,12,20" />
+                        Style="{StaticResource SecondaryButton}"
+                        Content="TR / EN"
+                        Padding="14,8"
+                        Margin="16,0,16,20"
+                        Click="LanguageToggle_Click" />
             </Grid>
         </Border>
 
-        <!-- Main Content -->
+        <!-- Pages -->
         <Grid Grid.Column="1">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="72" />
-                <RowDefinition Height="*" />
-            </Grid.RowDefinitions>
-
-            <!-- TopBar -->
-            <Border Grid.Row="0"
-                    Background="{StaticResource Surface0Brush}"
-                    BorderBrush="{StaticResource BorderBrush}"
-                    BorderThickness="0,0,0,1">
-
-                <Grid Margin="28,0">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="*" />
-                        <ColumnDefinition Width="Auto" />
-                    </Grid.ColumnDefinitions>
-
-                    <TextBlock Text="{loc:Tr Key=NavigationOverview}"
-                               Style="{StaticResource TitleText}"
-                               VerticalAlignment="Center" />
-
-                    <Button Grid.Column="1"
-                            Content="TR / EN"
-                            Style="{StaticResource SecondaryButton}"
-                            Click="LanguageToggle_Click"
-                            VerticalAlignment="Center" />
-                </Grid>
-            </Border>
-
-            <!-- Page Content -->
-            <ScrollViewer Grid.Row="1"
-                          VerticalScrollBarVisibility="Auto">
-                <StackPanel Margin="28">
-
-                    <TextBlock Text="{loc:Tr Key=NavigationOverview}"
-                               Style="{StaticResource DisplayText}"
-                               Margin="0,0,0,8" />
-
-                    <TextBlock Text="{loc:Tr Key=OverviewDescription}"
-                               Style="{StaticResource BodyText}"
-                               Foreground="{StaticResource TextSecondaryBrush}"
-                               Margin="0,0,0,28" />
-
-                    <Border Style="{StaticResource CardStyle}"
-                            MinHeight="180">
-                        <StackPanel>
-                            <Grid Margin="0,0,0,12">
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="*" />
-                                    <ColumnDefinition Width="Auto" />
-                                </Grid.ColumnDefinitions>
-
-                                <TextBlock Text="{loc:Tr Key=StorageOverview}"
-                                           Style="{StaticResource TitleText}"
-                                           VerticalAlignment="Center" />
-
-                          <Button Grid.Column="1"
-                                  Content="{loc:Tr Key=CommonRefresh}"
-                                  Style="{StaticResource SecondaryButton}"
-                                  x:Name="RefreshButton"
-                                  Click="RefreshButton_Click" />
-                          </Grid>
-                            <ItemsControl x:Name="DrivesList">
-    <ItemsControl.ItemTemplate>
-        <DataTemplate>
-            <Border Background="{StaticResource Surface2Brush}"
-                    CornerRadius="8"
-                    Padding="16"
-                    Margin="0,0,0,12">
-
-                <StackPanel>
-                    <TextBlock Text="{Binding Name}"
-                               Style="{StaticResource TitleText}" />
-
-                    <StackPanel Orientation="Horizontal"
-                                Margin="0,4,0,12">
-                        <TextBlock Text="{Binding DriveLetter}"
-                                   Style="{StaticResource CaptionText}"
-                                   Foreground="{StaticResource TextSecondaryBrush}"
-                                   VerticalAlignment="Center" />
-
-                        <Border Background="{StaticResource Surface3Brush}"
-                                BorderBrush="{StaticResource BorderBrush}"
-                                BorderThickness="1"
-                                CornerRadius="4"
-                                Padding="6,1"
-                                Margin="8,0,0,0">
-                            <TextBlock Foreground="{StaticResource TextSecondaryBrush}"
-                                       VerticalAlignment="Center">
-                                <TextBlock.Style>
-                                    <Style TargetType="TextBlock"
-                                           BasedOn="{StaticResource CaptionText}">
-                                        <Setter Property="Text" Value="{loc:Tr Key=DiskMediaUnknown}" />
-                                        <Style.Triggers>
-                                            <DataTrigger Binding="{Binding MediaType}" Value="Ssd">
-                                                <Setter Property="Text" Value="{loc:Tr Key=DiskMediaSsd}" />
-                                            </DataTrigger>
-                                            <DataTrigger Binding="{Binding MediaType}" Value="Hdd">
-                                                <Setter Property="Text" Value="{loc:Tr Key=DiskMediaHdd}" />
-                                            </DataTrigger>
-                                            <DataTrigger Binding="{Binding MediaType}" Value="Nvme">
-                                                <Setter Property="Text" Value="{loc:Tr Key=DiskMediaNvme}" />
-                                            </DataTrigger>
-                                        </Style.Triggers>
-                                    </Style>
-                                </TextBlock.Style>
-                            </TextBlock>
-                        </Border>
-                    </StackPanel>
-
-                    <TextBlock Text="{Binding TotalSizeFormatted}"
-                               Style="{StaticResource BodyText}" />
-                     <StackPanel Orientation="Horizontal"
-                                Margin="0,8,0,0">
-                        <TextBlock Text="{loc:Tr Key=DiskLabelUsed}"
-                                   Style="{StaticResource BodyText}"
-                                   Foreground="{StaticResource TextSecondaryBrush}"
-                                   Margin="0,0,6,0" />
-                        <TextBlock Text="{Binding UsedSpaceFormatted}"
-                                   Style="{StaticResource BodyText}" />
-                    </StackPanel>
-
-                     <StackPanel Orientation="Horizontal"
-                                Margin="0,4,0,0">
-                        <TextBlock Text="{loc:Tr Key=DiskLabelFree}"
-                                   Style="{StaticResource BodyText}"
-                                   Foreground="{StaticResource TextSecondaryBrush}"
-                                   Margin="0,0,6,0" />
-                        <TextBlock Text="{Binding AvailableFreeSpaceFormatted}"
-                                   Style="{StaticResource BodyText}" />
-                    </StackPanel>
-                      <TextBlock Text="{Binding UsagePercentage, Mode=OneWay, StringFormat={}{0:0}%}"
-                      Style="{StaticResource CaptionText}"
-                      HorizontalAlignment="Right"
-                      Margin="0,8,0,0" />
-                     <ProgressBar Value="{Binding UsagePercentage, Mode=OneWay}"
-                      Maximum="100"
-                      Height="8"
-                      Margin="0,16,0,0"
-                      Background="{StaticResource Surface3Brush}"
-                      Foreground="{StaticResource AccentBrush}" />
-                </StackPanel>
-
-            </Border>
-        </DataTemplate>
-    </ItemsControl.ItemTemplate>
-</ItemsControl>
-                        </StackPanel>
-                    </Border>
-
-                </StackPanel>
-            </ScrollViewer>
+            <views:OverviewView x:Name="Overview" />
+            <views:AnalyzerView x:Name="Analyzer" Visibility="Collapsed" />
         </Grid>
     </Grid>
 </Window>

@@ -11,6 +11,8 @@ public sealed class DiskInfo
 
     public DiskMediaType MediaType { get; init; } = DiskMediaType.Unknown;
 
+    public string FileSystem { get; init; } = string.Empty;
+
     public long TotalSize { get; init; }
 
     public long AvailableFreeSpace { get; init; }
@@ -20,6 +22,10 @@ public sealed class DiskInfo
     public double UsagePercentage => TotalSize <= 0
     ? 0
     : (double)UsedSpace / TotalSize * 100;
+
+    public bool IsWarning => UsagePercentage >= 75 && UsagePercentage < 90;
+
+    public bool IsCritical => UsagePercentage >= 90;
 
     public string TotalSizeFormatted => FormatSize(TotalSize);
 

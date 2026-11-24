@@ -1,4 +1,6 @@
-﻿# DiskScope
+<p align="center"><img src="docs/logo.png" alt="DiskScope" width="110"></p>
+
+# DiskScope
 
 **TR:** Windows için geliştirilen, taşınabilir (portable) bir disk ve depolama alanı analiz uygulaması.
 **EN:** A portable disk and storage analyzer for Windows.
@@ -12,10 +14,10 @@
 
 - **Genel Bakış:** bilgisayardaki diskler; kapasite, kullanılan/boş alan, doluluk yüzdesi, dosya sistemi ve gerçek disk türü (**SSD, HDD, NVMe**; emin olunamazsa **Bilinmiyor**)
 - **Disk Analizi:** disk veya klasörü arka planda tarar (iptal edilebilir, ilerleme gösterir); erişilemeyen klasörler raporlanır
-- **Treemap:** klasör ve dosya boyutlarını iç içe gösterir; üzerine gelince bilgi kartı, tıklayınca seçim, çift tıklayınca içeri girme, sağ tık menüsü (Explorer'da göster, yolu kopyala)
+- **Treemap:** klasör ve dosya boyutlarını iç içe ve dosya uzantısına göre renkli gösterir; üzerine gelince bilgi kartı, tıklayınca seçim, çift tıklayınca içeri girme, sağ tık menüsü (Explorer'da göster, yolu kopyala)
 - Klasör listesi (boyut ve yüzde çubuğu), yol çubuğu (breadcrumb), dosya türü dağılımı ve en büyük uzantılar
 - Türkçe ve İngilizce arayüz, yeniden başlatmadan dil değiştirme
-- Koyu temalı, tutarlı bir tasarım sistemi
+- Koyu temalı, modern bir tasarım: halka grafikli disk kartları, yumuşak geçiş animasyonları, uygulama simgesi
 - Taşınabilir: ayarlar ve günlükler uygulamanın yanındaki `Data` klasöründe tutulur
 - Hata günlüğü (Serilog) ve beklenmeyen hatalarda uygulamanın çökmemesi
 

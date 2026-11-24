@@ -4,6 +4,7 @@ using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
 using System.Windows.Input;
 using System.Windows.Media;
+using System.Windows.Media.Animation;
 using DiskScope.App.Visuals;
 using DiskScope.Core.Formatting;
 using DiskScope.Core.Treemap;
@@ -36,6 +37,14 @@ public sealed class TreemapControl : FrameworkElement
     private static readonly Pen HoverPen = Frozen(new Pen(new SolidColorBrush(Color.FromRgb(0x2B, 0xB3, 0xC0)), 1.5));
     private static readonly Pen SelectionPen = Frozen(new Pen(new SolidColorBrush(Color.FromRgb(0xF1, 0xF3, 0xF5)), 2));
 
+    public static readonly DependencyProperty RevealProperty = DependencyProperty.Register(
+        nameof(Reveal),
+        typeof(double),
+        typeof(TreemapControl),
+        new FrameworkPropertyMetadata(1.0, FrameworkPropertyMetadataOptions.AffectsRender));
+
+    private static readonly Pen LeafPen = Frozen(new Pen(new SolidColorBrush(Color.FromArgb(0x30, 0xFF, 0xFF, 0xFF)), 1));
+
     private readonly List<Tile> _tiles = new();
     private readonly Popup _popup;
     private readonly TextBlock _popupTitle;
@@ -43,6 +52,7 @@ public sealed class TreemapControl : FrameworkElement
     private readonly TextBlock _popupPath;
 
     private ScanNode? _root;
+    private bool _revealPending;
     private Tile? _hover;
     private ScanNode? _selected;
 
@@ -112,6 +122,16 @@ public sealed class TreemapControl : FrameworkElement
 
     public Func<ScanNode, string>? PathProvider { get; set; }
 
+    /// <summary>Dosya karolarının rengini belirler (örneğin uzantıya göre). Verilmezse kategori rengi kullanılır.</summary>
+    public Func<ScanNode, Brush>? FileBrushProvider { get; set; }
+
+    /// <summary>0 ile 1 arası açılış animasyonu değeri (karolar yumuşakça belirir).</summary>
+    public double Reveal
+    {
+        get => (double)GetValue(RevealProperty);
+        set => SetValue(RevealProperty, value);
+    }
+
     public event EventHandler<ScanNode>? NodeClicked;
 
     public event EventHandler<ScanNode>? NodeActivated;
@@ -132,6 +152,7 @@ public sealed class TreemapControl : FrameworkElement
     public void SetRoot(ScanNode? root)
     {
         _root = root;
+        _revealPending = root is not null;
         Rebuild();
     }
 
@@ -153,6 +174,19 @@ public sealed class TreemapControl : FrameworkElement
         if (_root is not null && ActualWidth >= 8 && ActualHeight >= 8)
         {
             BuildLevel(_root, new Rect(0, 0, ActualWidth, ActualHeight), 0, _tiles);
+        }
+
+        if (_revealPending && _tiles.Count > 0)
+        {
+            _revealPending = false;
+
+            BeginAnimation(RevealProperty, new DoubleAnimation
+            {
+                From = 0,
+                To = 1,
+                Duration = TimeSpan.FromMilliseconds(420),
+                EasingFunction = new CubicEase { EasingMode = EasingMode.EaseOut }
+            });
         }
 
         InvalidateVisual();
@@ -233,12 +267,19 @@ public sealed class TreemapControl : FrameworkElement
         dc.DrawRectangle(BackgroundBrush, null, full);
 
         var dpi = VisualTreeHelper.GetDpi(this).PixelsPerDip;
+        var reveal = Math.Clamp(Reveal, 0, 1);
+        var scale = 0.96 + 0.04 * reveal;
+
+        dc.PushOpacity(reveal);
+        dc.PushTransform(new ScaleTransform(scale, scale, ActualWidth / 2, ActualHeight / 2));
 
         foreach (var tile in _tiles)
         {
             DrawTile(dc, tile, dpi);
         }
 
+        dc.Pop();
+        dc.Pop();
         dc.Pop();
     }
 
@@ -276,13 +317,15 @@ public sealed class TreemapControl : FrameworkElement
         }
         else
         {
-            Brush fill = node.IsDirectory
+            tile.Fill ??= node.IsDirectory
                 ? FolderBrush
                 : node.IsSmallFilesGroup
                     ? SmallFilesTileBrush
-                    : CategoryPalette.GetTileBrush(node.Category);
+                    : FileBrushProvider?.Invoke(node) ?? CategoryPalette.GetTileBrush(node.Category);
 
-            dc.DrawRoundedRectangle(fill, null, rect, 3, 3);
+            var isFile = !node.IsDirectory && !node.IsSmallFilesGroup;
+
+            dc.DrawRoundedRectangle(tile.Fill, isFile ? LeafPen : null, rect, 3, 3);
             DrawLabel(dc, tile, rect, dpi);
 
             if (isHover)
@@ -483,6 +526,8 @@ public sealed class TreemapControl : FrameworkElement
         public List<Tile>? Children { get; set; }
 
         public bool HasHeader { get; set; }
+
+        public Brush? Fill { get; set; }
 
         public FormattedText? NameText { get; set; }
 

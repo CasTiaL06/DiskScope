@@ -48,5 +48,5 @@ env
 .DS_Store
 Thumbs.db
 
-# Derlenmis uygulamalar (surumler GitHub Releases'ten dagitilir)
+# Derlenmis uygulamalar (surumler GitHub Releases uzerinden dagitilir)
 *.exe

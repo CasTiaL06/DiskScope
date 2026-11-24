@@ -84,4 +84,9 @@
   <data name="CategorySystem" xml:space="preserve"><value>System files</value></data>
   <data name="CategoryDiskImage" xml:space="preserve"><value>Disk images</value></data>
   <data name="CategoryOther" xml:space="preserve"><value>Other</value></data>
+  <data name="CategoryGame" xml:space="preserve"><value>Game files</value></data>
+  <data name="OverviewDriveCount" xml:space="preserve"><value>{0} drives detected</value></data>
+  <data name="OverviewTotalCapacity" xml:space="preserve"><value>Total capacity</value></data>
+  <data name="OverviewUsedSpace" xml:space="preserve"><value>Used space</value></data>
+  <data name="OverviewFreeSpace" xml:space="preserve"><value>Free space</value></data>
 </root>

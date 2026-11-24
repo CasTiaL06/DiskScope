@@ -1,9 +1,11 @@
 using System.Diagnostics;
+using System.IO;
 using System.Text;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
+using System.Windows.Media.Animation;
 using DiskScope.App.Helpers;
 using DiskScope.App.Localization;
 using DiskScope.App.Visuals;
@@ -43,6 +45,7 @@ public partial class AnalyzerView : UserControl
         Treemap.NameProvider = NodeName;
         Treemap.DetailProvider = NodeDetail;
         Treemap.PathProvider = node => node.GetFullPath();
+        Treemap.FileBrushProvider = node => ExtensionPalette.GetTileBrush(Path.GetExtension(node.Name), node.Category);
         Treemap.NodeClicked += Treemap_NodeClicked;
         Treemap.NodeActivated += Treemap_NodeActivated;
 
@@ -150,7 +153,21 @@ public partial class AnalyzerView : UserControl
             BreadcrumbList.ItemsSource = null;
         }
 
+        UpdateSpinner(state == ViewState.Scanning);
         UpdateButtons();
+    }
+
+    private void UpdateSpinner(bool spinning)
+    {
+        if (!spinning)
+        {
+            SpinnerRotate.BeginAnimation(RotateTransform.AngleProperty, null);
+            return;
+        }
+
+        SpinnerRotate.BeginAnimation(
+            RotateTransform.AngleProperty,
+            new DoubleAnimation(0, 360, TimeSpan.FromSeconds(1)) { RepeatBehavior = RepeatBehavior.Forever });
     }
 
     private void UpdateButtons()
@@ -302,6 +319,9 @@ public partial class AnalyzerView : UserControl
 
         var total = _result.TotalSize;
 
+        // Uzantı renkleri önce dağıtılır; treemap ve sağ panel aynı renkleri kullanır.
+        ExtensionPalette.Assign(_result.Extensions);
+
         SumSizeValue.Text = SizeFormatter.Format(total);
         SumFilesValue.Text = _result.TotalFiles.ToString("N0");
         SumFoldersValue.Text = _result.TotalFolders.ToString("N0");
@@ -344,7 +364,7 @@ public partial class AnalyzerView : UserControl
             .Where(e => e.Size > 0)
             .Take(8)
             .Select(e => new StatRow(
-                CategoryPalette.GetBrush(e.Category),
+                ExtensionPalette.GetBrush(e.Extension, e.Category),
                 e.Extension.Length == 0 ? Loc.T("NoExtension") : e.Extension,
                 SizeFormatter.Format(e.Size),
                 Percent(e.Size, total)))
@@ -643,7 +663,7 @@ public partial class AnalyzerView : UserControl
             else
             {
                 Glyph = "\uE8A5";
-                IconBrush = CategoryPalette.GetBrush(node.Category);
+                IconBrush = ExtensionPalette.GetBrush(Path.GetExtension(node.Name), node.Category);
                 BarBrush = IconBrush;
             }
         }

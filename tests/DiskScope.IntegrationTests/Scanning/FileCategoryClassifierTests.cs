@@ -14,6 +14,8 @@ public sealed class FileCategoryClassifierTests
     [InlineData(".exe", FileCategory.Application)]
     [InlineData(".dll", FileCategory.System)]
     [InlineData(".vhdx", FileCategory.DiskImage)]
+    [InlineData(".pak", FileCategory.Game)]
+    [InlineData(".ucas", FileCategory.Game)]
     [InlineData(".xyz123", FileCategory.Other)]
     [InlineData("", FileCategory.Other)]
     [InlineData(null, FileCategory.Other)]

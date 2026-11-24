@@ -73,17 +73,19 @@ public partial class OverviewView : UserControl
         if (_disks.Count == 0)
         {
             SummaryText.Text = string.Empty;
+            TotalValue.Text = "-";
+            UsedValue.Text = "-";
+            FreeValue.Text = "-";
             return;
         }
 
         var total = _disks.Sum(disk => disk.TotalSize);
         var free = _disks.Sum(disk => disk.AvailableFreeSpace);
 
-        SummaryText.Text = Loc.F(
-            "OverviewSummary",
-            _disks.Count,
-            SizeFormatter.Format(total),
-            SizeFormatter.Format(free));
+        SummaryText.Text = Loc.F("OverviewDriveCount", _disks.Count);
+        TotalValue.Text = SizeFormatter.Format(total);
+        UsedValue.Text = SizeFormatter.Format(total - free);
+        FreeValue.Text = SizeFormatter.Format(free);
     }
 
     private async void RefreshButton_Click(object sender, RoutedEventArgs e)

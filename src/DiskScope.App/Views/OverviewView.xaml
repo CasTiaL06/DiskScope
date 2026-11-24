@@ -1,16 +1,27 @@
 <UserControl x:Class="DiskScope.App.Views.OverviewView"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:loc="clr-namespace:DiskScope.App.Localization">
+             xmlns:loc="clr-namespace:DiskScope.App.Localization"
+             xmlns:ctl="clr-namespace:DiskScope.App.Controls">
+
+    <UserControl.Resources>
+        <Style x:Key="StatChip" TargetType="Border">
+            <Setter Property="Width" Value="38" />
+            <Setter Property="Height" Value="38" />
+            <Setter Property="CornerRadius" Value="10" />
+            <Setter Property="Margin" Value="0,0,14,0" />
+        </Style>
+    </UserControl.Resources>
 
     <Grid Margin="32,28,32,24">
         <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
 
         <!-- Header -->
-        <Grid Margin="0,0,0,24">
+        <Grid Margin="0,0,0,22">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*" />
                 <ColumnDefinition Width="Auto" />
@@ -42,8 +53,61 @@
             </StackPanel>
         </Grid>
 
+        <!-- Summary cards -->
+        <Grid Grid.Row="1" Margin="0,0,0,24">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="16" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="16" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+
+            <Border Style="{StaticResource CardStyle}" Padding="18,16">
+                <StackPanel Orientation="Horizontal">
+                    <Border Style="{StaticResource StatChip}" Background="#262BB3C0">
+                        <TextBlock Text="&#xEDA2;" FontFamily="{StaticResource IconFont}" FontSize="17"
+                                   Foreground="{StaticResource AccentBrush}"
+                                   HorizontalAlignment="Center" VerticalAlignment="Center" />
+                    </Border>
+                    <StackPanel VerticalAlignment="Center">
+                        <TextBlock Text="{loc:Tr Key=OverviewTotalCapacity}" Style="{StaticResource CaptionText}" />
+                        <TextBlock x:Name="TotalValue" Style="{StaticResource TitleText}" Margin="0,2,0,0" />
+                    </StackPanel>
+                </StackPanel>
+            </Border>
+
+            <Border Grid.Column="2" Style="{StaticResource CardStyle}" Padding="18,16">
+                <StackPanel Orientation="Horizontal">
+                    <Border Style="{StaticResource StatChip}" Background="#263B82F6">
+                        <TextBlock Text="&#x25A6;" FontFamily="{StaticResource IconFont}" FontSize="17"
+                                   Foreground="#FF6AA2FF"
+                                   HorizontalAlignment="Center" VerticalAlignment="Center" />
+                    </Border>
+                    <StackPanel VerticalAlignment="Center">
+                        <TextBlock Text="{loc:Tr Key=OverviewUsedSpace}" Style="{StaticResource CaptionText}" />
+                        <TextBlock x:Name="UsedValue" Style="{StaticResource TitleText}" Margin="0,2,0,0" />
+                    </StackPanel>
+                </StackPanel>
+            </Border>
+
+            <Border Grid.Column="4" Style="{StaticResource CardStyle}" Padding="18,16">
+                <StackPanel Orientation="Horizontal">
+                    <Border Style="{StaticResource StatChip}" Background="#2646B968">
+                        <TextBlock Text="&#xE73E;" FontFamily="{StaticResource IconFont}" FontSize="17"
+                                   Foreground="{StaticResource SuccessBrush}"
+                                   HorizontalAlignment="Center" VerticalAlignment="Center" />
+                    </Border>
+                    <StackPanel VerticalAlignment="Center">
+                        <TextBlock Text="{loc:Tr Key=OverviewFreeSpace}" Style="{StaticResource CaptionText}" />
+                        <TextBlock x:Name="FreeValue" Style="{StaticResource TitleText}" Margin="0,2,0,0" />
+                    </StackPanel>
+                </StackPanel>
+            </Border>
+        </Grid>
+
         <!-- Disk cards -->
-        <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto">
+        <ScrollViewer Grid.Row="2" VerticalScrollBarVisibility="Auto">
             <Grid>
                 <ItemsControl x:Name="DrivesList">
                     <ItemsControl.ItemsPanel>
@@ -54,38 +118,85 @@
 
                     <ItemsControl.ItemTemplate>
                         <DataTemplate>
-                            <Border Style="{StaticResource CardStyle}"
-                                    Width="360"
-                                    Padding="20"
-                                    Margin="0,0,16,16">
-                                <StackPanel>
+                            <Border Width="400"
+                                    Padding="22"
+                                    Margin="0,0,16,16"
+                                    Opacity="0">
+                                <Border.Style>
+                                    <Style TargetType="Border" BasedOn="{StaticResource CardStyle}">
+                                        <Style.Triggers>
+                                            <Trigger Property="IsMouseOver" Value="True">
+                                                <Setter Property="BorderBrush" Value="{StaticResource AccentBrush}" />
+                                                <Setter Property="Background" Value="{StaticResource Surface2Brush}" />
+                                            </Trigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </Border.Style>
 
-                                    <!-- Title row -->
+                                <Border.RenderTransform>
+                                    <TranslateTransform Y="18" />
+                                </Border.RenderTransform>
+
+                                <Border.Triggers>
+                                    <EventTrigger RoutedEvent="FrameworkElement.Loaded">
+                                        <BeginStoryboard>
+                                            <Storyboard>
+                                                <DoubleAnimation Storyboard.TargetProperty="Opacity"
+                                                                 From="0" To="1" Duration="0:0:0.5" />
+                                                <DoubleAnimation Storyboard.TargetProperty="(UIElement.RenderTransform).(TranslateTransform.Y)"
+                                                                 From="18" To="0" Duration="0:0:0.5">
+                                                    <DoubleAnimation.EasingFunction>
+                                                        <CubicEase EasingMode="EaseOut" />
+                                                    </DoubleAnimation.EasingFunction>
+                                                </DoubleAnimation>
+                                            </Storyboard>
+                                        </BeginStoryboard>
+                                    </EventTrigger>
+                                </Border.Triggers>
+
+                                <StackPanel>
                                     <Grid>
                                         <Grid.ColumnDefinitions>
                                             <ColumnDefinition Width="Auto" />
                                             <ColumnDefinition Width="*" />
-                                            <ColumnDefinition Width="Auto" />
                                         </Grid.ColumnDefinitions>
 
-                                        <Border Width="40" Height="40"
-                                                CornerRadius="10"
-                                                Background="{StaticResource Surface3Brush}"
-                                                Margin="0,0,12,0">
-                                            <TextBlock Text="&#xEDA2;"
-                                                       FontFamily="{StaticResource IconFont}"
-                                                       FontSize="18"
-                                                       Foreground="{StaticResource TextSecondaryBrush}"
+                                        <!-- Usage ring -->
+                                        <Grid Width="96" Height="96" Margin="0,0,20,0">
+                                            <ctl:UsageRing Value="{Binding UsagePercentage, Mode=OneWay}"
+                                                           Thickness="10"
+                                                           TrackBrush="{StaticResource Surface3Brush}">
+                                                <ctl:UsageRing.Style>
+                                                    <Style TargetType="ctl:UsageRing">
+                                                        <Setter Property="RingBrush" Value="{StaticResource AccentBrush}" />
+                                                        <Style.Triggers>
+                                                            <DataTrigger Binding="{Binding IsWarning}" Value="True">
+                                                                <Setter Property="RingBrush" Value="{StaticResource WarningBrush}" />
+                                                            </DataTrigger>
+                                                            <DataTrigger Binding="{Binding IsCritical}" Value="True">
+                                                                <Setter Property="RingBrush" Value="{StaticResource DangerBrush}" />
+                                                            </DataTrigger>
+                                                        </Style.Triggers>
+                                                    </Style>
+                                                </ctl:UsageRing.Style>
+                                            </ctl:UsageRing>
+
+                                            <TextBlock Text="{Binding UsagePercentage, Mode=OneWay, StringFormat={}{0:0}%}"
+                                                       FontFamily="Segoe UI Variable Display, Segoe UI"
+                                                       FontSize="20"
+                                                       FontWeight="SemiBold"
+                                                       Foreground="{StaticResource TextPrimaryBrush}"
                                                        HorizontalAlignment="Center"
                                                        VerticalAlignment="Center" />
-                                        </Border>
+                                        </Grid>
 
                                         <StackPanel Grid.Column="1" VerticalAlignment="Center">
                                             <TextBlock Text="{Binding Name}"
                                                        Style="{StaticResource SubtitleText}"
+                                                       FontSize="16"
                                                        TextTrimming="CharacterEllipsis" />
 
-                                            <StackPanel Orientation="Horizontal" Margin="0,3,0,0">
+                                            <StackPanel Orientation="Horizontal" Margin="0,5,0,0">
                                                 <TextBlock Text="{Binding DriveLetter}"
                                                            Style="{StaticResource CaptionText}"
                                                            VerticalAlignment="Center" />
@@ -123,68 +234,43 @@
                                                            Margin="8,0,0,0"
                                                            VerticalAlignment="Center" />
                                             </StackPanel>
-                                        </StackPanel>
 
-                                        <TextBlock Grid.Column="2"
-                                                   Text="{Binding UsagePercentage, Mode=OneWay, StringFormat={}{0:0}%}"
-                                                   Style="{StaticResource TitleText}"
-                                                   VerticalAlignment="Center" />
-                                    </Grid>
+                                            <Grid Margin="0,14,0,0">
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition Width="*" />
+                                                    <ColumnDefinition Width="*" />
+                                                    <ColumnDefinition Width="*" />
+                                                </Grid.ColumnDefinitions>
 
-                                    <!-- Usage bar -->
-                                    <ProgressBar Value="{Binding UsagePercentage, Mode=OneWay}"
-                                                 Maximum="100"
-                                                 Margin="0,18,0,14">
-                                        <ProgressBar.Style>
-                                            <Style TargetType="ProgressBar"
-                                                   BasedOn="{StaticResource ThinProgress}">
-                                                <Style.Triggers>
-                                                    <DataTrigger Binding="{Binding IsWarning}" Value="True">
-                                                        <Setter Property="Foreground" Value="{StaticResource WarningBrush}" />
-                                                    </DataTrigger>
-                                                    <DataTrigger Binding="{Binding IsCritical}" Value="True">
-                                                        <Setter Property="Foreground" Value="{StaticResource DangerBrush}" />
-                                                    </DataTrigger>
-                                                </Style.Triggers>
-                                            </Style>
-                                        </ProgressBar.Style>
-                                    </ProgressBar>
+                                                <StackPanel>
+                                                    <TextBlock Text="{loc:Tr Key=DiskUsedShort}" Style="{StaticResource CaptionText}" />
+                                                    <TextBlock Text="{Binding UsedSpaceFormatted}"
+                                                               Style="{StaticResource BodyText}"
+                                                               FontWeight="SemiBold" Margin="0,2,0,0" />
+                                                </StackPanel>
 
-                                    <!-- Numbers -->
-                                    <Grid>
-                                        <Grid.ColumnDefinitions>
-                                            <ColumnDefinition Width="*" />
-                                            <ColumnDefinition Width="*" />
-                                            <ColumnDefinition Width="*" />
-                                        </Grid.ColumnDefinitions>
+                                                <StackPanel Grid.Column="1">
+                                                    <TextBlock Text="{loc:Tr Key=DiskFreeShort}" Style="{StaticResource CaptionText}" />
+                                                    <TextBlock Text="{Binding AvailableFreeSpaceFormatted}"
+                                                               Style="{StaticResource BodyText}"
+                                                               FontWeight="SemiBold" Margin="0,2,0,0" />
+                                                </StackPanel>
 
-                                        <StackPanel>
-                                            <TextBlock Text="{loc:Tr Key=DiskUsedShort}" Style="{StaticResource CaptionText}" />
-                                            <TextBlock Text="{Binding UsedSpaceFormatted}"
-                                                       Style="{StaticResource BodyText}"
-                                                       FontWeight="SemiBold" Margin="0,2,0,0" />
-                                        </StackPanel>
-
-                                        <StackPanel Grid.Column="1">
-                                            <TextBlock Text="{loc:Tr Key=DiskFreeShort}" Style="{StaticResource CaptionText}" />
-                                            <TextBlock Text="{Binding AvailableFreeSpaceFormatted}"
-                                                       Style="{StaticResource BodyText}"
-                                                       FontWeight="SemiBold" Margin="0,2,0,0" />
-                                        </StackPanel>
-
-                                        <StackPanel Grid.Column="2">
-                                            <TextBlock Text="{loc:Tr Key=DiskTotalShort}" Style="{StaticResource CaptionText}" />
-                                            <TextBlock Text="{Binding TotalSizeFormatted}"
-                                                       Style="{StaticResource BodyText}"
-                                                       FontWeight="SemiBold" Margin="0,2,0,0" />
+                                                <StackPanel Grid.Column="2">
+                                                    <TextBlock Text="{loc:Tr Key=DiskTotalShort}" Style="{StaticResource CaptionText}" />
+                                                    <TextBlock Text="{Binding TotalSizeFormatted}"
+                                                               Style="{StaticResource BodyText}"
+                                                               FontWeight="SemiBold" Margin="0,2,0,0" />
+                                                </StackPanel>
+                                            </Grid>
                                         </StackPanel>
                                     </Grid>
 
                                     <Button Style="{StaticResource SecondaryButton}"
                                             Content="{loc:Tr Key=ActionAnalyze}"
                                             Click="AnalyzeButton_Click"
-                                            Padding="16,8"
-                                            Margin="0,18,0,0"
+                                            Padding="16,9"
+                                            Margin="0,20,0,0"
                                             HorizontalAlignment="Stretch" />
                                 </StackPanel>
                             </Border>

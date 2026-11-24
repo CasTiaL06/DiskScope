@@ -37,6 +37,7 @@ public static class FileCategoryClassifier
         Add(FileCategory.Archive, ".zip", ".rar", ".7z", ".tar", ".gz", ".bz2", ".xz", ".cab", ".tgz");
         Add(FileCategory.Application, ".exe", ".msi", ".msix", ".appx", ".apk", ".jar", ".bat", ".cmd");
         Add(FileCategory.System, ".dll", ".sys", ".drv", ".ocx", ".cat", ".mui", ".mun");
+        Add(FileCategory.Game, ".pak", ".ucas", ".utoc", ".uasset", ".umap", ".forge", ".bundle", ".assets", ".bsa", ".ba2", ".big", ".vpk", ".wad", ".arc", ".rpf", ".xnb", ".unity3d", ".sb", ".toc", ".cas", ".npk");
         Add(FileCategory.DiskImage, ".iso", ".img", ".vhd", ".vhdx", ".vmdk", ".vdi", ".wim", ".esd", ".qcow2", ".ova");
 
         return map;

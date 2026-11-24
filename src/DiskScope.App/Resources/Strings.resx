@@ -84,4 +84,9 @@
   <data name="CategorySystem" xml:space="preserve"><value>Sistem dosyaları</value></data>
   <data name="CategoryDiskImage" xml:space="preserve"><value>Disk görüntüleri</value></data>
   <data name="CategoryOther" xml:space="preserve"><value>Diğer</value></data>
+  <data name="CategoryGame" xml:space="preserve"><value>Oyun dosyaları</value></data>
+  <data name="OverviewDriveCount" xml:space="preserve"><value>{0} disk algılandı</value></data>
+  <data name="OverviewTotalCapacity" xml:space="preserve"><value>Toplam kapasite</value></data>
+  <data name="OverviewUsedSpace" xml:space="preserve"><value>Kullanılan alan</value></data>
+  <data name="OverviewFreeSpace" xml:space="preserve"><value>Boş alan</value></data>
 </root>

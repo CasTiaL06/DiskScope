@@ -4,6 +4,7 @@
         xmlns:loc="clr-namespace:DiskScope.App.Localization"
         xmlns:views="clr-namespace:DiskScope.App.Views"
         Title="{loc:Tr Key=AppTitle}"
+        Icon="pack://application:,,,/Assets/DiskScope.ico"
         Width="1360"
         Height="820"
         MinWidth="1120"
@@ -32,15 +33,9 @@
 
                 <!-- Logo -->
                 <StackPanel Orientation="Horizontal" Margin="20,24,20,20">
-                    <Border Width="30" Height="30" CornerRadius="8"
-                            Background="{StaticResource AccentBrush}">
-                        <TextBlock Text="&#xEDA2;"
-                                   FontFamily="{StaticResource IconFont}"
-                                   FontSize="15"
-                                   Foreground="#FF0E1315"
-                                   HorizontalAlignment="Center"
-                                   VerticalAlignment="Center" />
-                    </Border>
+                    <Image Source="pack://application:,,,/Assets/logo.png"
+                           Width="32" Height="32"
+                           RenderOptions.BitmapScalingMode="HighQuality" />
 
                     <TextBlock Text="DiskScope"
                                FontFamily="Segoe UI Variable Display, Segoe UI"
@@ -80,6 +75,13 @@
 
         <!-- Pages -->
         <Grid Grid.Column="1">
+            <Grid.Background>
+                <RadialGradientBrush Center="0.9,0" GradientOrigin="0.9,0" RadiusX="0.9" RadiusY="0.75">
+                    <GradientStop Color="#1C2BB3C0" Offset="0" />
+                    <GradientStop Color="#002BB3C0" Offset="1" />
+                </RadialGradientBrush>
+            </Grid.Background>
+
             <views:OverviewView x:Name="Overview" />
             <views:AnalyzerView x:Name="Analyzer" Visibility="Collapsed" />
         </Grid>

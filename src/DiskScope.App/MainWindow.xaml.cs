@@ -1,5 +1,7 @@
 using System.Globalization;
 using System.Windows;
+using System.Windows.Media;
+using System.Windows.Media.Animation;
 using DiskScope.App.Helpers;
 using DiskScope.App.Views;
 using Serilog;
@@ -37,8 +39,35 @@ public partial class MainWindow : Window
 
     private void Nav_Checked(object sender, RoutedEventArgs e)
     {
-        Overview.Visibility = NavOverview.IsChecked == true ? Visibility.Visible : Visibility.Collapsed;
-        Analyzer.Visibility = NavAnalyzer.IsChecked == true ? Visibility.Visible : Visibility.Collapsed;
+        Show(Overview, NavOverview.IsChecked == true);
+        Show(Analyzer, NavAnalyzer.IsChecked == true);
+    }
+
+    /// <summary>Sayfayı gösterir/gizler; yeni açılan sayfa yumuşakça belirir.</summary>
+    private static void Show(FrameworkElement page, bool visible)
+    {
+        if (!visible)
+        {
+            page.Visibility = Visibility.Collapsed;
+            return;
+        }
+
+        if (page.Visibility == Visibility.Visible)
+        {
+            return;
+        }
+
+        page.Visibility = Visibility.Visible;
+
+        var slide = new TranslateTransform(0, 14);
+        page.RenderTransform = slide;
+
+        page.BeginAnimation(OpacityProperty, new DoubleAnimation(0, 1, TimeSpan.FromMilliseconds(260)));
+
+        slide.BeginAnimation(TranslateTransform.YProperty, new DoubleAnimation(14, 0, TimeSpan.FromMilliseconds(340))
+        {
+            EasingFunction = new CubicEase { EasingMode = EasingMode.EaseOut }
+        });
     }
 
     private async void LanguageToggle_Click(object sender, RoutedEventArgs e)

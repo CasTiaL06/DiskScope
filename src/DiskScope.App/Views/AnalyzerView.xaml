@@ -164,6 +164,20 @@
                         VerticalAlignment="Center"
                         MaxWidth="520"
                         Visibility="Collapsed">
+                <Grid Width="64" Height="64" HorizontalAlignment="Center" Margin="0,0,0,18">
+                    <Ellipse Stroke="{StaticResource Surface3Brush}" StrokeThickness="5" />
+                    <Path Stroke="{StaticResource AccentBrush}"
+                          StrokeThickness="5"
+                          StrokeStartLineCap="Round"
+                          StrokeEndLineCap="Round"
+                          Data="M 32,2.5 A 29.5,29.5 0 0 1 61.5,32"
+                          RenderTransformOrigin="0.5,0.5">
+                        <Path.RenderTransform>
+                            <RotateTransform x:Name="SpinnerRotate" />
+                        </Path.RenderTransform>
+                    </Path>
+                </Grid>
+
                 <TextBlock x:Name="ScanPercentText"
                            FontFamily="Segoe UI Variable Display, Segoe UI"
                            FontSize="56"

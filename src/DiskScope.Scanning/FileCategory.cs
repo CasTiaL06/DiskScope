@@ -11,5 +11,6 @@ public enum FileCategory
     Archive,
     Application,
     System,
-    DiskImage
+    DiskImage,
+    Game
 }

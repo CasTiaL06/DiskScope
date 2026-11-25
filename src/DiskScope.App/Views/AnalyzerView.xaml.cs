@@ -8,6 +8,7 @@ using System.Windows.Media;
 using System.Windows.Media.Animation;
 using DiskScope.App.Helpers;
 using DiskScope.App.Localization;
+using DiskScope.App.Services;
 using DiskScope.App.Visuals;
 using DiskScope.Core.Formatting;
 using DiskScope.Scanning;
@@ -101,6 +102,8 @@ public partial class AnalyzerView : UserControl
             _isScanning = false;
             _result = result;
 
+            _ = SaveSummaryAsync(result);
+
             SetState(ViewState.Result);
             BuildPanels();
             ShowFolder(result.Root);
@@ -128,6 +131,19 @@ public partial class AnalyzerView : UserControl
 
             UpdateScanUi();
             UpdateButtons();
+        }
+    }
+
+    /// <summary>Tamamlanan taramanın özetini geçmişe kaydeder (Genel Bakış ve Tarama Geçmişi için).</summary>
+    private static async Task SaveSummaryAsync(ScanResult result)
+    {
+        try
+        {
+            await AppServices.AddScanAsync(ScanSummaryFactory.Create(result, DateTime.UtcNow));
+        }
+        catch (Exception ex)
+        {
+            Log.Warning(ex, "Tarama özeti kaydedilemedi.");
         }
     }
 

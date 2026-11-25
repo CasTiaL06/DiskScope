@@ -5,14 +5,12 @@
   <resheader name="reader"><value>System.Resources.ResXResourceReader, System.Windows.Forms</value></resheader>
   <resheader name="writer"><value>System.Resources.ResXResourceWriter, System.Windows.Forms</value></resheader>
 
-  <data name="AppTitle" xml:space="preserve"><value>DiskScope</value></data>
+  <data name="AppTitle" xml:space="preserve"><value>NexDisk</value></data>
 
   <data name="Workspace" xml:space="preserve"><value>WORKSPACE</value></data>
   <data name="NavigationOverview" xml:space="preserve"><value>Overview</value></data>
   <data name="NavigationAnalyzer" xml:space="preserve"><value>Disk Analysis</value></data>
-  <data name="NavigationLargeFiles" xml:space="preserve"><value>Large Files</value></data>
   <data name="NavigationFileTypes" xml:space="preserve"><value>File Types</value></data>
-  <data name="NavigationSettings" xml:space="preserve"><value>Settings</value></data>
 
   <data name="OverviewDescription" xml:space="preserve"><value>Monitor your storage at a glance.</value></data>
   <data name="StorageOverview" xml:space="preserve"><value>Storage Overview</value></data>
@@ -89,4 +87,69 @@
   <data name="OverviewTotalCapacity" xml:space="preserve"><value>Total capacity</value></data>
   <data name="OverviewUsedSpace" xml:space="preserve"><value>Used space</value></data>
   <data name="OverviewFreeSpace" xml:space="preserve"><value>Free space</value></data>
+  <data name="BrandTagline" xml:space="preserve"><value>Discover and manage your storage.</value></data>
+  <data name="OverviewDrives" xml:space="preserve"><value>Drives</value></data>
+  <data name="CardDiskUsage" xml:space="preserve"><value>Disk Usage</value></data>
+  <data name="CardUsageHistory" xml:space="preserve"><value>Disk Usage, Last 7 Days</value></data>
+  <data name="CardTopFolders" xml:space="preserve"><value>Largest Folders</value></data>
+  <data name="CardDiskHealth" xml:space="preserve"><value>Disk Health</value></data>
+  <data name="CardRecentScans" xml:space="preserve"><value>Recent Scans</value></data>
+  <data name="LinkSeeAll" xml:space="preserve"><value>See all →</value></data>
+  <data name="LegendEmpty" xml:space="preserve"><value>Analyze a drive to see the file type breakdown.</value></data>
+  <data name="LegendSource" xml:space="preserve"><value>Source: scan of {0} · {1}</value></data>
+  <data name="ChartCollecting" xml:space="preserve"><value>The chart builds up as the app records your daily usage. At least two days are needed.</value></data>
+  <data name="TopFoldersEmpty" xml:space="preserve"><value>Analyze a drive to see folder sizes.</value></data>
+  <data name="RecentEmpty" xml:space="preserve"><value>No scans yet.</value></data>
+  <data name="PercentFormat" xml:space="preserve"><value>{0:0.0}%</value></data>
+  <data name="PercentWhole" xml:space="preserve"><value>{0:0}%</value></data>
+  <data name="TemperatureFormat" xml:space="preserve"><value>{0} °C</value></data>
+  <data name="HoursFormat" xml:space="preserve"><value>{0:N0} h</value></data>
+  <data name="HealthHealthy" xml:space="preserve"><value>Healthy</value></data>
+  <data name="HealthWarning" xml:space="preserve"><value>Warning</value></data>
+  <data name="HealthUnhealthy" xml:space="preserve"><value>Unhealthy</value></data>
+  <data name="HealthUnknown" xml:space="preserve"><value>Unknown</value></data>
+  <data name="HealthUnavailable" xml:space="preserve"><value>Health information could not be read on this computer.</value></data>
+  <data name="HealthNeedsAdmin" xml:space="preserve"><value>On some drives this information can only be read with administrator rights.</value></data>
+  <data name="DateToday" xml:space="preserve"><value>Today • {0}</value></data>
+  <data name="DateYesterday" xml:space="preserve"><value>Yesterday • {0}</value></data>
+  <data name="DateDaysAgo" xml:space="preserve"><value>{0} days ago</value></data>
+  <data name="NavigationHealth" xml:space="preserve"><value>Disk Health</value></data>
+  <data name="NavigationHistory" xml:space="preserve"><value>Scan History</value></data>
+  <data name="NavigationSettings" xml:space="preserve"><value>Settings</value></data>
+  <data name="NavigationAbout" xml:space="preserve"><value>About</value></data>
+  <data name="NavigationLargeFiles" xml:space="preserve"><value>Large Files</value></data>
+  <data name="NavigationDuplicates" xml:space="preserve"><value>Duplicate Files</value></data>
+  <data name="NavigationSoon" xml:space="preserve"><value>Coming soon</value></data>
+  <data name="HealthPageDesc" xml:space="preserve"><value>Health status of your physical drives as reported by Windows.</value></data>
+  <data name="HealthTemperature" xml:space="preserve"><value>Temperature</value></data>
+  <data name="HealthPowerOn" xml:space="preserve"><value>Power-on time</value></data>
+  <data name="HealthEmpty" xml:space="preserve"><value>Disk health information could not be read. It is not available on some computers or virtual machines.</value></data>
+  <data name="HistoryDesc" xml:space="preserve"><value>Your completed scans. Stored only on this computer.</value></data>
+  <data name="HistoryClear" xml:space="preserve"><value>Clear history</value></data>
+  <data name="HistoryClearConfirm" xml:space="preserve"><value>Delete the scan history? Files on your drives are not touched.</value></data>
+  <data name="HistoryEmpty" xml:space="preserve"><value>No completed scans yet.</value></data>
+  <data name="HistoryDetail" xml:space="preserve"><value>{0:N0} files · {1:N0} folders · {2}</value></data>
+  <data name="HistoryReanalyze" xml:space="preserve"><value>Scan again</value></data>
+  <data name="SettingsLanguage" xml:space="preserve"><value>Language</value></data>
+  <data name="SettingsLanguageDesc" xml:space="preserve"><value>Choose the interface language. The change applies immediately.</value></data>
+  <data name="LanguageTurkish" xml:space="preserve"><value>Türkçe</value></data>
+  <data name="LanguageEnglish" xml:space="preserve"><value>English</value></data>
+  <data name="SettingsBackground" xml:space="preserve"><value>Background</value></data>
+  <data name="SettingsBackgroundDesc" xml:space="preserve"><value>Choose the image shown at the top of Overview, or upload your own. Your choice is saved.</value></data>
+  <data name="BackgroundNeonPlatter" xml:space="preserve"><value>Neon Platter</value></data>
+  <data name="BackgroundAurora" xml:space="preserve"><value>Aurora</value></data>
+  <data name="BackgroundGrid" xml:space="preserve"><value>Neon Grid</value></data>
+  <data name="BackgroundWaves" xml:space="preserve"><value>Waves</value></data>
+  <data name="BackgroundCustom" xml:space="preserve"><value>Your image</value></data>
+  <data name="BackgroundUpload" xml:space="preserve"><value>Upload image…</value></data>
+  <data name="BackgroundReset" xml:space="preserve"><value>Reset to default</value></data>
+  <data name="BackgroundFilter" xml:space="preserve"><value>Images</value></data>
+  <data name="BackgroundErrorFormat" xml:space="preserve"><value>Supported formats: JPG, PNG, BMP.</value></data>
+  <data name="BackgroundErrorSize" xml:space="preserve"><value>The image is too large (25 MB maximum).</value></data>
+  <data name="BackgroundErrorInvalid" xml:space="preserve"><value>This image could not be opened. Try another file.</value></data>
+  <data name="SettingsData" xml:space="preserve"><value>Data location</value></data>
+  <data name="SettingsOpenFolder" xml:space="preserve"><value>Open folder</value></data>
+  <data name="AboutVersion" xml:space="preserve"><value>Version {0}</value></data>
+  <data name="AboutLicense" xml:space="preserve"><value>Open source under the MIT License</value></data>
+  <data name="AboutGitHub" xml:space="preserve"><value>View on GitHub</value></data>
 </root>

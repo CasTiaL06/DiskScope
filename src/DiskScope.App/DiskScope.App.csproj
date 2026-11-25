@@ -13,16 +13,19 @@
 
   <ItemGroup>
     <Resource Include="Assets\logo.png" />
+    <Resource Include="Assets\logo-mark.png" />
     <Resource Include="Assets\DiskScope.ico" />
+    <Resource Include="Assets\Backgrounds\*.jpg" />
   </ItemGroup>
 
   <PropertyGroup>
     <OutputType>WinExe</OutputType>
     <TargetFramework>net10.0-windows</TargetFramework>
     <RootNamespace>DiskScope.App</RootNamespace>
-    <AssemblyName>DiskScope</AssemblyName>
-    <Product>DiskScope</Product>
-    <Description>Disk and storage analyzer</Description>
+    <AssemblyName>NexDisk</AssemblyName>
+    <Product>NexDisk</Product>
+    <Description>NexDisk - disk and storage analyzer</Description>
+    <Authors>NexDisk contributors</Authors>
     <ApplicationIcon>Assets\DiskScope.ico</ApplicationIcon>
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>

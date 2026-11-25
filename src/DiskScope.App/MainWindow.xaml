@@ -5,10 +5,10 @@
         xmlns:views="clr-namespace:DiskScope.App.Views"
         Title="{loc:Tr Key=AppTitle}"
         Icon="pack://application:,,,/Assets/DiskScope.ico"
-        Width="1360"
-        Height="820"
-        MinWidth="1120"
-        MinHeight="680"
+        Width="1400"
+        Height="860"
+        MinWidth="1160"
+        MinHeight="720"
         WindowStartupLocation="CenterScreen"
         Background="{StaticResource Surface0Brush}"
         Foreground="{StaticResource TextPrimaryBrush}"
@@ -16,14 +16,20 @@
 
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="220" />
+            <ColumnDefinition Width="268" />
             <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
 
         <!-- Sidebar -->
-        <Border Background="{StaticResource Surface1Brush}"
-                BorderBrush="{StaticResource BorderBrush}"
-                BorderThickness="0,0,1,0">
+        <Border BorderBrush="{StaticResource BorderBrush}" BorderThickness="0,0,1,0">
+            <Border.Background>
+                <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
+                    <GradientStop Color="#FF0F1325" Offset="0" />
+                    <GradientStop Color="#FF0B0E1B" Offset="0.7" />
+                    <GradientStop Color="#FF120F2B" Offset="1" />
+                </LinearGradientBrush>
+            </Border.Background>
+
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto" />
@@ -31,59 +37,76 @@
                     <RowDefinition Height="Auto" />
                 </Grid.RowDefinitions>
 
-                <!-- Logo -->
-                <StackPanel Orientation="Horizontal" Margin="20,24,20,20">
-                    <Image Source="pack://application:,,,/Assets/logo.png"
-                           Width="32" Height="32"
+                <!-- Brand -->
+                <StackPanel Orientation="Horizontal" Margin="24,28,20,26">
+                    <Image Source="pack://application:,,,/Assets/logo-mark.png"
+                           Width="42" Height="42"
                            RenderOptions.BitmapScalingMode="HighQuality" />
 
-                    <TextBlock Text="DiskScope"
-                               FontFamily="Segoe UI Variable Display, Segoe UI"
-                               FontSize="18"
-                               FontWeight="SemiBold"
+                    <TextBlock FontFamily="Segoe UI Variable Display, Segoe UI"
+                               FontSize="24"
+                               FontWeight="Bold"
                                Foreground="{StaticResource TextPrimaryBrush}"
                                VerticalAlignment="Center"
-                               Margin="12,0,0,0" />
+                               Margin="12,0,0,0">
+                        <Run Text="Nex" /><Run Text="Disk" Foreground="{StaticResource AccentCyanBrush}" />
+                    </TextBlock>
                 </StackPanel>
 
-                <!-- Navigation -->
-                <StackPanel Grid.Row="1" Margin="12,4,12,0">
-                    <RadioButton x:Name="NavOverview"
-                                 GroupName="Nav"
-                                 Style="{StaticResource NavButton}"
-                                 Tag="&#xE80F;"
-                                 Content="{loc:Tr Key=NavigationOverview}"
-                                 Checked="Nav_Checked" />
+                <!-- Main navigation -->
+                <StackPanel Grid.Row="1" Margin="14,0,14,0">
+                    <RadioButton x:Name="NavOverview" GroupName="Nav" Style="{StaticResource NavButton}"
+                                 Tag="&#xE80F;" Content="{loc:Tr Key=NavigationOverview}" Checked="Nav_Checked" />
 
-                    <RadioButton x:Name="NavAnalyzer"
-                                 GroupName="Nav"
-                                 Style="{StaticResource NavButton}"
-                                 Tag="&#xE721;"
-                                 Content="{loc:Tr Key=NavigationAnalyzer}"
-                                 Checked="Nav_Checked" />
+                    <RadioButton x:Name="NavAnalyzer" GroupName="Nav" Style="{StaticResource NavButton}"
+                                 Tag="&#xE721;" Content="{loc:Tr Key=NavigationAnalyzer}" Checked="Nav_Checked" />
+
+                    <RadioButton x:Name="NavHealth" GroupName="Nav" Style="{StaticResource NavButton}"
+                                 Tag="&#x271A;" Content="{loc:Tr Key=NavigationHealth}" Checked="Nav_Checked" />
+
+                    <RadioButton x:Name="NavHistory" GroupName="Nav" Style="{StaticResource NavButton}"
+                                 Tag="&#xE81C;" Content="{loc:Tr Key=NavigationHistory}" Checked="Nav_Checked" />
+
+                    <!-- Planned modules (not available yet) -->
+                    <RadioButton GroupName="Nav" Style="{StaticResource NavButton}" IsEnabled="False"
+                                 ToolTipService.ShowOnDisabled="True"
+                                 ToolTip="{loc:Tr Key=NavigationSoon}"
+                                 Tag="&#xE8A5;" Content="{loc:Tr Key=NavigationLargeFiles}" />
+
+                    <RadioButton GroupName="Nav" Style="{StaticResource NavButton}" IsEnabled="False"
+                                 ToolTipService.ShowOnDisabled="True"
+                                 ToolTip="{loc:Tr Key=NavigationSoon}"
+                                 Tag="&#xE8C8;" Content="{loc:Tr Key=NavigationDuplicates}" />
                 </StackPanel>
 
-                <!-- Language -->
-                <Button Grid.Row="2"
-                        Style="{StaticResource SecondaryButton}"
-                        Content="TR / EN"
-                        Padding="14,8"
-                        Margin="16,0,16,20"
-                        Click="LanguageToggle_Click" />
+                <!-- Bottom navigation -->
+                <StackPanel Grid.Row="2" Margin="14,0,14,18">
+                    <Border Height="1" Background="{StaticResource BorderBrush}" Margin="8,0,8,14" />
+
+                    <RadioButton x:Name="NavSettings" GroupName="Nav" Style="{StaticResource NavButton}"
+                                 Tag="&#xE713;" Content="{loc:Tr Key=NavigationSettings}" Checked="Nav_Checked" />
+
+                    <RadioButton x:Name="NavAbout" GroupName="Nav" Style="{StaticResource NavButton}"
+                                 Tag="&#xE946;" Content="{loc:Tr Key=NavigationAbout}" Checked="Nav_Checked" />
+                </StackPanel>
             </Grid>
         </Border>
 
         <!-- Pages -->
         <Grid Grid.Column="1">
             <Grid.Background>
-                <RadialGradientBrush Center="0.9,0" GradientOrigin="0.9,0" RadiusX="0.9" RadiusY="0.75">
-                    <GradientStop Color="#1C2BB3C0" Offset="0" />
-                    <GradientStop Color="#002BB3C0" Offset="1" />
+                <RadialGradientBrush Center="0.95,0" GradientOrigin="0.95,0" RadiusX="0.9" RadiusY="0.8">
+                    <GradientStop Color="#228B5CF6" Offset="0" />
+                    <GradientStop Color="#004C8DFF" Offset="1" />
                 </RadialGradientBrush>
             </Grid.Background>
 
             <views:OverviewView x:Name="Overview" />
             <views:AnalyzerView x:Name="Analyzer" Visibility="Collapsed" />
+            <views:HealthView x:Name="Health" Visibility="Collapsed" />
+            <views:HistoryView x:Name="History" Visibility="Collapsed" />
+            <views:SettingsView x:Name="Settings" Visibility="Collapsed" />
+            <views:AboutView x:Name="About" Visibility="Collapsed" />
         </Grid>
     </Grid>
 </Window>

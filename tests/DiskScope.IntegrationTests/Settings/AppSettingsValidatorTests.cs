@@ -92,4 +92,44 @@ public class AppSettingsValidatorTests
         Assert.Throws<ArgumentNullException>(
             () => AppSettingsValidator.Validate(null!));
     }
+
+    [Fact]
+    public void Validate_WhenBackgroundIsUnknownPreset_ResetsToDefault()
+    {
+        var settings = new AppSettings { BackgroundPreset = "olmayan" };
+
+        var result = AppSettingsValidator.Validate(settings);
+
+        Assert.False(result);
+        Assert.Equal("neon-platter", settings.BackgroundPreset);
+    }
+
+    [Fact]
+    public void Validate_WhenCustomBackgroundFileHasPath_IsRejected()
+    {
+        var settings = new AppSettings
+        {
+            BackgroundMode = "Custom",
+            CustomBackgroundFile = @"..\..\gizli.png"
+        };
+
+        var result = AppSettingsValidator.Validate(settings);
+
+        Assert.False(result);
+        Assert.Null(settings.CustomBackgroundFile);
+        Assert.Equal("Preset", settings.BackgroundMode);
+    }
+
+    [Fact]
+    public void Validate_WhenCustomBackgroundIsValid_IsKept()
+    {
+        var settings = new AppSettings
+        {
+            BackgroundMode = "Custom",
+            CustomBackgroundFile = "custom-abc.png"
+        };
+
+        Assert.True(AppSettingsValidator.Validate(settings));
+        Assert.Equal("Custom", settings.BackgroundMode);
+    }
 }

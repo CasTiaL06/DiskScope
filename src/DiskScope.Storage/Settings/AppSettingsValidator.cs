@@ -40,6 +40,33 @@ public static class AppSettingsValidator
             isValid = false;
         }
 
+        if (settings.BackgroundMode is not ("Preset" or "Custom"))
+        {
+            settings.BackgroundMode = "Preset";
+            isValid = false;
+        }
+
+        if (!BackgroundPresets.IsKnown(settings.BackgroundPreset))
+        {
+            settings.BackgroundPreset = BackgroundPresets.Default;
+            isValid = false;
+        }
+
+        // Özel görsel yalnızca düz bir dosya adı olabilir (klasör gezintisi/yol kabul edilmez).
+        if (settings.CustomBackgroundFile is not null &&
+            (settings.CustomBackgroundFile.Length == 0 ||
+             settings.CustomBackgroundFile != Path.GetFileName(settings.CustomBackgroundFile)))
+        {
+            settings.CustomBackgroundFile = null;
+            isValid = false;
+        }
+
+        if (settings.BackgroundMode == "Custom" && settings.CustomBackgroundFile is null)
+        {
+            settings.BackgroundMode = "Preset";
+            isValid = false;
+        }
+
         return isValid;
     }
 

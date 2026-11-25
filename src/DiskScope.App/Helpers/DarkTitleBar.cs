@@ -1,4 +1,4 @@
-using System.Runtime.InteropServices;
+﻿using System.Runtime.InteropServices;
 using System.Windows;
 using System.Windows.Interop;
 
@@ -23,11 +23,11 @@ internal static class DarkTitleBar
             var dark = 1;
             DwmSetWindowAttribute(handle, UseImmersiveDarkMode, ref dark, sizeof(int));
 
-            // Renkler 0x00BBGGRR biçimindedir. #121416 ve #2C3238.
-            var caption = 0x00161412;
+            // Renkler 0x00BBGGRR biçimindedir. #0A0D17 ve #222A4A.
+            var caption = 0x00170D0A;
             DwmSetWindowAttribute(handle, CaptionColor, ref caption, sizeof(int));
 
-            var border = 0x00382C2C;
+            var border = 0x004A2A22;
             DwmSetWindowAttribute(handle, BorderColor, ref border, sizeof(int));
         }
         catch (Exception)

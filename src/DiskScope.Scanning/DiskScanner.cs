@@ -48,6 +48,10 @@ public sealed class DiskScanner
 
                     FileSystem = drive.DriveFormat,
 
+                    DiskNumber = drive.DriveType == DriveType.Fixed
+                        ? PhysicalDiskLocator.GetDiskNumber(drive.Name)
+                        : null,
+
                     TotalSize = drive.TotalSize,
 
                     AvailableFreeSpace = drive.AvailableFreeSpace

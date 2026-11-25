@@ -2,6 +2,7 @@
 using System.Windows;
 using System.Windows.Threading;
 using DiskScope.App.Localization;
+using DiskScope.App.Services;
 using DiskScope.Storage.Logging;
 using DiskScope.Storage.Paths;
 using DiskScope.Storage.Settings;
@@ -29,7 +30,7 @@ public partial class App : Application
             Log.Logger = LoggingConfiguration.Create(paths.DataDirectory);
 
             Log.Information(
-                "DiskScope başlıyor. Taşınabilir mod: {IsPortable}, veri klasörü: {DataDirectory}",
+                "NexDisk başlıyor. Taşınabilir mod: {IsPortable}, veri klasörü: {DataDirectory}",
                 paths.IsPortable,
                 paths.DataDirectory);
 
@@ -51,17 +52,19 @@ public partial class App : Application
 
             LocalizationManager.Initialize(Localization);
 
+            AppServices.Initialize(paths.DataDirectory, _settingsService, _settings);
+
             var mainWindow = new MainWindow();
             mainWindow.Show();
         }
         catch (Exception ex)
         {
-            Log.Fatal(ex, "DiskScope başlatılamadı.");
+            Log.Fatal(ex, "NexDisk başlatılamadı.");
 
             // Dil sistemi henüz hazır olmayabilir; bu yüzden mesaj iki dillidir.
             MessageBox.Show(
-                "DiskScope başlatılamadı. / DiskScope could not start.\n\n" + ex.Message,
-                "DiskScope",
+                "NexDisk başlatılamadı. / NexDisk could not start.\n\n" + ex.Message,
+                "NexDisk",
                 MessageBoxButton.OK,
                 MessageBoxImage.Error);
 
@@ -71,7 +74,7 @@ public partial class App : Application
 
     protected override void OnExit(ExitEventArgs e)
     {
-        Log.Information("DiskScope kapanıyor.");
+        Log.Information("NexDisk kapanıyor.");
         Log.CloseAndFlush();
 
         base.OnExit(e);

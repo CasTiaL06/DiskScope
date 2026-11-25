@@ -1,5 +1,5 @@
-using System.Globalization;
 using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Media;
 using System.Windows.Media.Animation;
 using DiskScope.App.Helpers;
@@ -10,24 +10,53 @@ namespace DiskScope.App;
 
 public partial class MainWindow : Window
 {
+    private readonly Dictionary<RadioButton, FrameworkElement> _pages;
+
     public MainWindow()
     {
         InitializeComponent();
 
+        _pages = new Dictionary<RadioButton, FrameworkElement>
+        {
+            [NavOverview] = Overview,
+            [NavAnalyzer] = Analyzer,
+            [NavHealth] = Health,
+            [NavHistory] = History,
+            [NavSettings] = Settings,
+            [NavAbout] = About
+        };
+
         SourceInitialized += (_, _) => DarkTitleBar.Apply(this);
 
         Overview.AnalyzeRequested += async (_, e) => await AnalyzeAsync(e.Path, e.ExpectedBytes);
-        Analyzer.ChooseDiskRequested += (_, _) => NavOverview.IsChecked = true;
+        History.AnalyzeRequested += async (_, e) => await AnalyzeAsync(e.Path, e.ExpectedBytes);
+        Overview.NavigateRequested += (_, page) => Navigate(page);
+        Analyzer.ChooseDiskRequested += (_, _) => Navigate("Overview");
 
         // Olay bağlantıları hazır olduktan sonra ilk sayfayı seç.
         NavOverview.IsChecked = true;
+    }
+
+    private void Navigate(string page)
+    {
+        var target = page switch
+        {
+            "Analyzer" => NavAnalyzer,
+            "Health" => NavHealth,
+            "History" => NavHistory,
+            "Settings" => NavSettings,
+            "About" => NavAbout,
+            _ => NavOverview
+        };
+
+        target.IsChecked = true;
     }
 
     private async Task AnalyzeAsync(string path, long? expectedBytes)
     {
         try
         {
-            NavAnalyzer.IsChecked = true;
+            Navigate("Analyzer");
 
             await Analyzer.StartScanAsync(path, expectedBytes);
         }
@@ -39,8 +68,10 @@ public partial class MainWindow : Window
 
     private void Nav_Checked(object sender, RoutedEventArgs e)
     {
-        Show(Overview, NavOverview.IsChecked == true);
-        Show(Analyzer, NavAnalyzer.IsChecked == true);
+        foreach (var (button, page) in _pages)
+        {
+            Show(page, button.IsChecked == true);
+        }
     }
 
     /// <summary>Sayfayı gösterir/gizler; yeni açılan sayfa yumuşakça belirir.</summary>
@@ -68,23 +99,5 @@ public partial class MainWindow : Window
         {
             EasingFunction = new CubicEase { EasingMode = EasingMode.EaseOut }
         });
-    }
-
-    private async void LanguageToggle_Click(object sender, RoutedEventArgs e)
-    {
-        try
-        {
-            var app = (App)Application.Current;
-
-            var culture = app.Localization.CurrentCulture.Name == "tr-TR"
-                ? CultureInfo.GetCultureInfo("en-US")
-                : CultureInfo.GetCultureInfo("tr-TR");
-
-            await app.SetLanguageAsync(culture);
-        }
-        catch (Exception ex)
-        {
-            Log.Error(ex, "Dil değiştirilemedi.");
-        }
     }
 }

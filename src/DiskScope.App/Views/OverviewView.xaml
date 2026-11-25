@@ -6,109 +6,186 @@
 
     <UserControl.Resources>
         <Style x:Key="StatChip" TargetType="Border">
-            <Setter Property="Width" Value="38" />
-            <Setter Property="Height" Value="38" />
-            <Setter Property="CornerRadius" Value="10" />
+            <Setter Property="Width" Value="44" />
+            <Setter Property="Height" Value="44" />
+            <Setter Property="CornerRadius" Value="12" />
             <Setter Property="Margin" Value="0,0,14,0" />
         </Style>
+
+        <Style x:Key="CardIcon" TargetType="TextBlock">
+            <Setter Property="FontFamily" Value="{StaticResource IconFont}" />
+            <Setter Property="FontSize" Value="16" />
+            <Setter Property="VerticalAlignment" Value="Center" />
+            <Setter Property="Margin" Value="0,0,10,0" />
+        </Style>
+
+        <Style x:Key="LinkButton" TargetType="Button" BasedOn="{StaticResource GhostButton}">
+            <Setter Property="Foreground" Value="{StaticResource AccentCyanBrush}" />
+            <Setter Property="FontSize" Value="12" />
+            <Setter Property="Padding" Value="8,4" />
+        </Style>
+
+        <DataTemplate x:Key="LegendRowTemplate">
+            <Grid Margin="0,0,0,10">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="56" />
+                </Grid.ColumnDefinitions>
+
+                <Ellipse Width="10" Height="10" Fill="{Binding Brush}" VerticalAlignment="Center" Margin="0,0,10,0" />
+                <TextBlock Grid.Column="1" Text="{Binding Name}" Style="{StaticResource BodyText}" TextTrimming="CharacterEllipsis" />
+                <TextBlock Grid.Column="2" Text="{Binding SizeText}" Style="{StaticResource BodyText}"
+                           Foreground="{StaticResource TextSecondaryBrush}" Margin="10,0,0,0" />
+                <TextBlock Grid.Column="3" Text="{Binding PercentText}" Style="{StaticResource CaptionText}"
+                           HorizontalAlignment="Right" VerticalAlignment="Center" />
+            </Grid>
+        </DataTemplate>
     </UserControl.Resources>
 
-    <Grid Margin="32,28,32,24">
-        <Grid.RowDefinitions>
-            <RowDefinition Height="Auto" />
-            <RowDefinition Height="Auto" />
-            <RowDefinition Height="*" />
-        </Grid.RowDefinitions>
+    <ScrollViewer VerticalScrollBarVisibility="Auto">
+        <StackPanel Margin="28,24,28,28">
 
-        <!-- Header -->
-        <Grid Margin="0,0,0,22">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*" />
-                <ColumnDefinition Width="Auto" />
-            </Grid.ColumnDefinitions>
+            <!-- Hero banner: background image is user-selectable (Settings) -->
+            <Border Height="210"
+                    CornerRadius="20"
+                    BorderBrush="{StaticResource BorderBrush}"
+                    BorderThickness="1"
+                    Margin="0,0,0,18">
+                <Border.Background>
+                    <ImageBrush x:Name="HeroBrush" Stretch="UniformToFill" AlignmentX="Right" />
+                </Border.Background>
 
-            <StackPanel>
-                <TextBlock Text="{loc:Tr Key=NavigationOverview}"
-                           Style="{StaticResource DisplayText}" />
-
-                <TextBlock x:Name="SummaryText"
-                           Style="{StaticResource BodyText}"
-                           Foreground="{StaticResource TextSecondaryBrush}"
-                           Margin="0,6,0,0" />
-            </StackPanel>
-
-            <StackPanel Grid.Column="1"
-                        Orientation="Horizontal"
-                        VerticalAlignment="Center">
-
-                <Button x:Name="RefreshButton"
-                        Style="{StaticResource SecondaryButton}"
-                        Content="{loc:Tr Key=CommonRefresh}"
-                        Click="RefreshButton_Click"
-                        Margin="0,0,8,0" />
-
-                <Button Style="{StaticResource PrimaryButton}"
-                        Content="{loc:Tr Key=ActionAnalyzeFolder}"
-                        Click="PickFolder_Click" />
-            </StackPanel>
-        </Grid>
-
-        <!-- Summary cards -->
-        <Grid Grid.Row="1" Margin="0,0,0,24">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*" />
-                <ColumnDefinition Width="16" />
-                <ColumnDefinition Width="*" />
-                <ColumnDefinition Width="16" />
-                <ColumnDefinition Width="*" />
-            </Grid.ColumnDefinitions>
-
-            <Border Style="{StaticResource CardStyle}" Padding="18,16">
-                <StackPanel Orientation="Horizontal">
-                    <Border Style="{StaticResource StatChip}" Background="#262BB3C0">
-                        <TextBlock Text="&#xEDA2;" FontFamily="{StaticResource IconFont}" FontSize="17"
-                                   Foreground="{StaticResource AccentBrush}"
-                                   HorizontalAlignment="Center" VerticalAlignment="Center" />
+                <Grid>
+                    <!-- Readability overlay: darker on the left where the text is -->
+                    <Border CornerRadius="20">
+                        <Border.Background>
+                            <LinearGradientBrush StartPoint="0,0" EndPoint="1,0">
+                                <GradientStop Color="#F00A0D17" Offset="0" />
+                                <GradientStop Color="#B00A0D17" Offset="0.45" />
+                                <GradientStop Color="#000A0D17" Offset="1" />
+                            </LinearGradientBrush>
+                        </Border.Background>
                     </Border>
-                    <StackPanel VerticalAlignment="Center">
-                        <TextBlock Text="{loc:Tr Key=OverviewTotalCapacity}" Style="{StaticResource CaptionText}" />
-                        <TextBlock x:Name="TotalValue" Style="{StaticResource TitleText}" Margin="0,2,0,0" />
-                    </StackPanel>
-                </StackPanel>
+
+                    <Grid Margin="34,0,34,0">
+                        <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                            <Image Source="pack://application:,,,/Assets/logo-mark.png"
+                                   Width="84" Height="84"
+                                   RenderOptions.BitmapScalingMode="HighQuality" />
+
+                            <StackPanel Margin="18,0,0,0" VerticalAlignment="Center">
+                                <TextBlock FontFamily="Segoe UI Variable Display, Segoe UI"
+                                           FontSize="42"
+                                           FontWeight="Bold"
+                                           Foreground="{StaticResource TextPrimaryBrush}">
+                                    <Run Text="Nex" /><Run Text="Disk" Foreground="{StaticResource AccentCyanBrush}" />
+                                </TextBlock>
+
+                                <TextBlock Text="{loc:Tr Key=BrandTagline}"
+                                           FontSize="15"
+                                           Foreground="{StaticResource TextSecondaryBrush}"
+                                           Margin="2,2,0,0" />
+
+                                <StackPanel Orientation="Horizontal" Margin="0,16,0,0">
+                                    <Button x:Name="RefreshButton"
+                                            Style="{StaticResource SecondaryButton}"
+                                            Content="{loc:Tr Key=CommonRefresh}"
+                                            Click="RefreshButton_Click"
+                                            Margin="0,0,8,0" />
+
+                                    <Button Style="{StaticResource PrimaryButton}"
+                                            Content="{loc:Tr Key=ActionAnalyzeFolder}"
+                                            Click="PickFolder_Click" />
+                                </StackPanel>
+                            </StackPanel>
+                        </StackPanel>
+                    </Grid>
+                </Grid>
             </Border>
 
-            <Border Grid.Column="2" Style="{StaticResource CardStyle}" Padding="18,16">
-                <StackPanel Orientation="Horizontal">
-                    <Border Style="{StaticResource StatChip}" Background="#263B82F6">
-                        <TextBlock Text="&#x25A6;" FontFamily="{StaticResource IconFont}" FontSize="17"
-                                   Foreground="#FF6AA2FF"
-                                   HorizontalAlignment="Center" VerticalAlignment="Center" />
-                    </Border>
-                    <StackPanel VerticalAlignment="Center">
-                        <TextBlock Text="{loc:Tr Key=OverviewUsedSpace}" Style="{StaticResource CaptionText}" />
-                        <TextBlock x:Name="UsedValue" Style="{StaticResource TitleText}" Margin="0,2,0,0" />
-                    </StackPanel>
-                </StackPanel>
-            </Border>
+            <!-- Summary cards -->
+            <Grid Margin="0,0,0,18">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="16" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="16" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
 
-            <Border Grid.Column="4" Style="{StaticResource CardStyle}" Padding="18,16">
-                <StackPanel Orientation="Horizontal">
-                    <Border Style="{StaticResource StatChip}" Background="#2646B968">
-                        <TextBlock Text="&#xE73E;" FontFamily="{StaticResource IconFont}" FontSize="17"
-                                   Foreground="{StaticResource SuccessBrush}"
-                                   HorizontalAlignment="Center" VerticalAlignment="Center" />
-                    </Border>
-                    <StackPanel VerticalAlignment="Center">
-                        <TextBlock Text="{loc:Tr Key=OverviewFreeSpace}" Style="{StaticResource CaptionText}" />
-                        <TextBlock x:Name="FreeValue" Style="{StaticResource TitleText}" Margin="0,2,0,0" />
+                <Border Style="{StaticResource CardStyle}" Padding="18,16">
+                    <StackPanel>
+                        <StackPanel Orientation="Horizontal">
+                            <Border Style="{StaticResource StatChip}" Background="#264C8DFF">
+                                <TextBlock Text="&#xEDA2;" FontFamily="{StaticResource IconFont}" FontSize="18"
+                                           Foreground="{StaticResource AccentBrush}"
+                                           HorizontalAlignment="Center" VerticalAlignment="Center" />
+                            </Border>
+                            <StackPanel VerticalAlignment="Center">
+                                <TextBlock Text="{loc:Tr Key=OverviewTotalCapacity}" Style="{StaticResource CaptionText}" />
+                                <TextBlock x:Name="TotalValue" Style="{StaticResource TitleText}" FontSize="22" Margin="0,2,0,0" />
+                            </StackPanel>
+                        </StackPanel>
+                        <ProgressBar Value="100" Maximum="100" Margin="0,14,0,0"
+                                     Style="{StaticResource ThinProgress}" />
                     </StackPanel>
-                </StackPanel>
-            </Border>
-        </Grid>
+                </Border>
 
-        <!-- Disk cards -->
-        <ScrollViewer Grid.Row="2" VerticalScrollBarVisibility="Auto">
-            <Grid>
+                <Border Grid.Column="2" Style="{StaticResource CardStyle}" Padding="18,16">
+                    <StackPanel>
+                        <Grid>
+                            <StackPanel Orientation="Horizontal">
+                                <Border Style="{StaticResource StatChip}" Background="#268B5CF6">
+                                    <TextBlock Text="&#x25A6;" FontFamily="{StaticResource IconFont}" FontSize="18"
+                                               Foreground="{StaticResource AccentPurpleBrush}"
+                                               HorizontalAlignment="Center" VerticalAlignment="Center" />
+                                </Border>
+                                <StackPanel VerticalAlignment="Center">
+                                    <TextBlock Text="{loc:Tr Key=OverviewUsedSpace}" Style="{StaticResource CaptionText}" />
+                                    <TextBlock x:Name="UsedValue" Style="{StaticResource TitleText}" FontSize="22" Margin="0,2,0,0" />
+                                </StackPanel>
+                            </StackPanel>
+                            <TextBlock x:Name="UsedPercentText" Style="{StaticResource CaptionText}"
+                                       HorizontalAlignment="Right" VerticalAlignment="Bottom" />
+                        </Grid>
+                        <ProgressBar x:Name="UsedBar" Maximum="100" Margin="0,14,0,0"
+                                     Style="{StaticResource ThinProgress}"
+                                     Foreground="{StaticResource AccentPurpleBrush}" />
+                    </StackPanel>
+                </Border>
+
+                <Border Grid.Column="4" Style="{StaticResource CardStyle}" Padding="18,16">
+                    <StackPanel>
+                        <Grid>
+                            <StackPanel Orientation="Horizontal">
+                                <Border Style="{StaticResource StatChip}" Background="#2634D399">
+                                    <TextBlock Text="&#xE73E;" FontFamily="{StaticResource IconFont}" FontSize="18"
+                                               Foreground="{StaticResource SuccessBrush}"
+                                               HorizontalAlignment="Center" VerticalAlignment="Center" />
+                                </Border>
+                                <StackPanel VerticalAlignment="Center">
+                                    <TextBlock Text="{loc:Tr Key=OverviewFreeSpace}" Style="{StaticResource CaptionText}" />
+                                    <TextBlock x:Name="FreeValue" Style="{StaticResource TitleText}" FontSize="22" Margin="0,2,0,0" />
+                                </StackPanel>
+                            </StackPanel>
+                            <TextBlock x:Name="FreePercentText" Style="{StaticResource CaptionText}"
+                                       HorizontalAlignment="Right" VerticalAlignment="Bottom" />
+                        </Grid>
+                        <ProgressBar x:Name="FreeBar" Maximum="100" Margin="0,14,0,0"
+                                     Style="{StaticResource ThinProgress}"
+                                     Foreground="{StaticResource SuccessBrush}" />
+                    </StackPanel>
+                </Border>
+            </Grid>
+
+            <!-- Drives -->
+            <TextBlock Text="{loc:Tr Key=OverviewDrives}"
+                       Style="{StaticResource SubtitleText}"
+                       Margin="2,0,0,12" />
+
+            <Grid Margin="0,0,0,2">
                 <ItemsControl x:Name="DrivesList">
                     <ItemsControl.ItemsPanel>
                         <ItemsPanelTemplate>
@@ -118,8 +195,8 @@
 
                     <ItemsControl.ItemTemplate>
                         <DataTemplate>
-                            <Border Width="400"
-                                    Padding="22"
+                            <Border Width="380"
+                                    Padding="20"
                                     Margin="0,0,16,16"
                                     Opacity="0">
                                 <Border.Style>
@@ -127,7 +204,6 @@
                                         <Style.Triggers>
                                             <Trigger Property="IsMouseOver" Value="True">
                                                 <Setter Property="BorderBrush" Value="{StaticResource AccentBrush}" />
-                                                <Setter Property="Background" Value="{StaticResource Surface2Brush}" />
                                             </Trigger>
                                         </Style.Triggers>
                                     </Style>
@@ -161,14 +237,13 @@
                                             <ColumnDefinition Width="*" />
                                         </Grid.ColumnDefinitions>
 
-                                        <!-- Usage ring -->
-                                        <Grid Width="96" Height="96" Margin="0,0,20,0">
+                                        <Grid Width="92" Height="92" Margin="0,0,18,0">
                                             <ctl:UsageRing Value="{Binding UsagePercentage, Mode=OneWay}"
                                                            Thickness="10"
                                                            TrackBrush="{StaticResource Surface3Brush}">
                                                 <ctl:UsageRing.Style>
                                                     <Style TargetType="ctl:UsageRing">
-                                                        <Setter Property="RingBrush" Value="{StaticResource AccentBrush}" />
+                                                        <Setter Property="RingBrush" Value="{StaticResource AccentGradientBrush}" />
                                                         <Style.Triggers>
                                                             <DataTrigger Binding="{Binding IsWarning}" Value="True">
                                                                 <Setter Property="RingBrush" Value="{StaticResource WarningBrush}" />
@@ -183,7 +258,7 @@
 
                                             <TextBlock Text="{Binding UsagePercentage, Mode=OneWay, StringFormat={}{0:0}%}"
                                                        FontFamily="Segoe UI Variable Display, Segoe UI"
-                                                       FontSize="20"
+                                                       FontSize="19"
                                                        FontWeight="SemiBold"
                                                        Foreground="{StaticResource TextPrimaryBrush}"
                                                        HorizontalAlignment="Center"
@@ -270,7 +345,7 @@
                                             Content="{loc:Tr Key=ActionAnalyze}"
                                             Click="AnalyzeButton_Click"
                                             Padding="16,9"
-                                            Margin="0,20,0,0"
+                                            Margin="0,18,0,0"
                                             HorizontalAlignment="Stretch" />
                                 </StackPanel>
                             </Border>
@@ -284,6 +359,251 @@
                            Foreground="{StaticResource TextSecondaryBrush}"
                            Visibility="Collapsed" />
             </Grid>
-        </ScrollViewer>
-    </Grid>
+
+            <!-- Usage breakdown + history chart -->
+            <Grid Margin="0,2,0,18">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="16" />
+                    <ColumnDefinition Width="1.3*" />
+                </Grid.ColumnDefinitions>
+
+                <Border Style="{StaticResource CardStyle}" Padding="20">
+                    <StackPanel>
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="&#x25D4;" Style="{StaticResource CardIcon}" Foreground="{StaticResource AccentBrush}" />
+                            <TextBlock Text="{loc:Tr Key=CardDiskUsage}" Style="{StaticResource SubtitleText}" />
+                        </StackPanel>
+
+                        <Grid Margin="0,16,0,0">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+
+                            <Grid Width="150" Height="150" Margin="0,0,22,0" VerticalAlignment="Top">
+                                <ctl:UsageRing x:Name="OverallRing"
+                                               Thickness="14"
+                                               TrackBrush="{StaticResource Surface3Brush}"
+                                               RingBrush="{StaticResource AccentGradientBrush}" />
+                                <TextBlock x:Name="OverallPercentText"
+                                           FontFamily="Segoe UI Variable Display, Segoe UI"
+                                           FontSize="28"
+                                           FontWeight="SemiBold"
+                                           Foreground="{StaticResource TextPrimaryBrush}"
+                                           HorizontalAlignment="Center"
+                                           VerticalAlignment="Center" />
+                            </Grid>
+
+                            <StackPanel Grid.Column="1" VerticalAlignment="Center">
+                                <ItemsControl x:Name="LegendList" ItemTemplate="{StaticResource LegendRowTemplate}" />
+
+                                <TextBlock x:Name="LegendEmptyText"
+                                           Text="{loc:Tr Key=LegendEmpty}"
+                                           Style="{StaticResource CaptionText}"
+                                           TextWrapping="Wrap"
+                                           Visibility="Collapsed" />
+                            </StackPanel>
+                        </Grid>
+
+                        <TextBlock x:Name="LegendSourceText"
+                                   Style="{StaticResource CaptionText}"
+                                   Foreground="{StaticResource TextDisabledBrush}"
+                                   TextTrimming="CharacterEllipsis"
+                                   Margin="0,10,0,0" />
+                    </StackPanel>
+                </Border>
+
+                <Border Grid.Column="2" Style="{StaticResource CardStyle}" Padding="20">
+                    <StackPanel>
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="&#x2197;" Style="{StaticResource CardIcon}" Foreground="{StaticResource AccentCyanBrush}" />
+                            <TextBlock Text="{loc:Tr Key=CardUsageHistory}" Style="{StaticResource SubtitleText}" />
+                        </StackPanel>
+
+                        <ctl:UsageChart x:Name="Chart" Height="210" Margin="0,12,0,0" />
+                    </StackPanel>
+                </Border>
+            </Grid>
+
+            <!-- Top folders / health / recent analyses -->
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="16" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="16" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+
+                <!-- Top folders -->
+                <Border Style="{StaticResource CardStyle}" Padding="20">
+                    <StackPanel>
+                        <Grid>
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock Text="&#xE734;" Style="{StaticResource CardIcon}" Foreground="{StaticResource WarningBrush}" />
+                                <TextBlock Text="{loc:Tr Key=CardTopFolders}" Style="{StaticResource SubtitleText}" />
+                            </StackPanel>
+                            <Button Style="{StaticResource LinkButton}"
+                                    Content="{loc:Tr Key=LinkSeeAll}"
+                                    HorizontalAlignment="Right"
+                                    Click="SeeAnalyzer_Click" />
+                        </Grid>
+
+                        <ItemsControl x:Name="TopFoldersList" Margin="0,14,0,0">
+                            <ItemsControl.ItemTemplate>
+                                <DataTemplate>
+                                    <Grid Margin="0,0,0,12">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="Auto" />
+                                            <ColumnDefinition Width="*" />
+                                            <ColumnDefinition Width="Auto" />
+                                        </Grid.ColumnDefinitions>
+
+                                        <TextBlock Text="&#xE8B7;" FontFamily="{StaticResource IconFont}" FontSize="16"
+                                                   Foreground="#FFE8B04B" VerticalAlignment="Center" Margin="0,0,10,0" />
+
+                                        <StackPanel Grid.Column="1" VerticalAlignment="Center">
+                                            <TextBlock Text="{Binding Name}" Style="{StaticResource BodyText}"
+                                                       TextTrimming="CharacterEllipsis" Margin="0,0,0,5" />
+                                            <ProgressBar Value="{Binding Percent, Mode=OneWay}" Maximum="100" Height="5"
+                                                         Style="{StaticResource ThinProgress}" />
+                                        </StackPanel>
+
+                                        <TextBlock Grid.Column="2" Text="{Binding SizeText}"
+                                                   Style="{StaticResource BodyText}"
+                                                   Foreground="{StaticResource TextSecondaryBrush}"
+                                                   Margin="12,0,0,0" VerticalAlignment="Center" />
+                                    </Grid>
+                                </DataTemplate>
+                            </ItemsControl.ItemTemplate>
+                        </ItemsControl>
+
+                        <TextBlock x:Name="TopFoldersEmpty"
+                                   Text="{loc:Tr Key=TopFoldersEmpty}"
+                                   Style="{StaticResource CaptionText}"
+                                   TextWrapping="Wrap"
+                                   Margin="0,16,0,0"
+                                   Visibility="Collapsed" />
+                    </StackPanel>
+                </Border>
+
+                <!-- Disk health -->
+                <Border Grid.Column="2" Style="{StaticResource CardStyle}" Padding="20">
+                    <StackPanel>
+                        <Grid>
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock Text="&#x271A;" Style="{StaticResource CardIcon}" Foreground="{StaticResource SuccessBrush}" />
+                                <TextBlock Text="{loc:Tr Key=CardDiskHealth}" Style="{StaticResource SubtitleText}" />
+                            </StackPanel>
+                            <Button Style="{StaticResource LinkButton}"
+                                    Content="{loc:Tr Key=LinkSeeAll}"
+                                    HorizontalAlignment="Right"
+                                    Click="SeeHealth_Click" />
+                        </Grid>
+
+                        <StackPanel Orientation="Horizontal" Margin="0,18,0,0">
+                            <Border x:Name="HealthChip" Width="64" Height="64" CornerRadius="32"
+                                    Background="#2634D399" Margin="0,0,16,0">
+                                <TextBlock x:Name="HealthGlyph"
+                                           FontFamily="{StaticResource IconFont}" FontSize="28"
+                                           HorizontalAlignment="Center" VerticalAlignment="Center" />
+                            </Border>
+
+                            <StackPanel VerticalAlignment="Center">
+                                <TextBlock x:Name="HealthStatusText"
+                                           FontFamily="Segoe UI Variable Display, Segoe UI"
+                                           FontSize="24" FontWeight="SemiBold" />
+                                <TextBlock x:Name="HealthDetailText"
+                                           Style="{StaticResource CaptionText}"
+                                           TextWrapping="Wrap" MaxWidth="170" Margin="0,3,0,0" />
+                            </StackPanel>
+                        </StackPanel>
+
+                        <Border BorderBrush="{StaticResource BorderBrush}" BorderThickness="0,1,0,0"
+                                Margin="0,18,0,0" Padding="0,14,0,0">
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="*" />
+                                </Grid.ColumnDefinitions>
+
+                                <StackPanel>
+                                    <TextBlock Text="{loc:Tr Key=HealthTemperature}" Style="{StaticResource CaptionText}" />
+                                    <TextBlock x:Name="HealthTempValue" Style="{StaticResource BodyText}"
+                                               FontWeight="SemiBold" Margin="0,2,0,0" />
+                                </StackPanel>
+
+                                <StackPanel Grid.Column="1">
+                                    <TextBlock Text="{loc:Tr Key=HealthPowerOn}" Style="{StaticResource CaptionText}" />
+                                    <TextBlock x:Name="HealthHoursValue" Style="{StaticResource BodyText}"
+                                               FontWeight="SemiBold" Margin="0,2,0,0" />
+                                </StackPanel>
+                            </Grid>
+                        </Border>
+                    </StackPanel>
+                </Border>
+
+                <!-- Recent analyses -->
+                <Border Grid.Column="4" Style="{StaticResource CardStyle}" Padding="20">
+                    <StackPanel>
+                        <Grid>
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock Text="&#xE81C;" Style="{StaticResource CardIcon}" Foreground="{StaticResource AccentPurpleBrush}" />
+                                <TextBlock Text="{loc:Tr Key=CardRecentScans}" Style="{StaticResource SubtitleText}" />
+                            </StackPanel>
+                            <Button Style="{StaticResource LinkButton}"
+                                    Content="{loc:Tr Key=LinkSeeAll}"
+                                    HorizontalAlignment="Right"
+                                    Click="SeeHistory_Click" />
+                        </Grid>
+
+                        <ItemsControl x:Name="RecentList" Margin="0,10,0,0">
+                            <ItemsControl.ItemTemplate>
+                                <DataTemplate>
+                                    <Button Style="{StaticResource GhostButton}"
+                                            HorizontalContentAlignment="Stretch"
+                                            Padding="6,8"
+                                            Click="RecentScan_Click">
+                                        <Grid>
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="Auto" />
+                                                <ColumnDefinition Width="*" />
+                                                <ColumnDefinition Width="Auto" />
+                                            </Grid.ColumnDefinitions>
+
+                                            <Border Width="38" Height="38" CornerRadius="10"
+                                                    Background="{StaticResource Surface3Brush}" Margin="0,0,12,0">
+                                                <TextBlock Text="&#xEDA2;" FontFamily="{StaticResource IconFont}" FontSize="16"
+                                                           Foreground="{StaticResource AccentBrush}"
+                                                           HorizontalAlignment="Center" VerticalAlignment="Center" />
+                                            </Border>
+
+                                            <StackPanel Grid.Column="1" VerticalAlignment="Center">
+                                                <TextBlock Text="{Binding Title}" Style="{StaticResource BodyText}"
+                                                           TextTrimming="CharacterEllipsis" />
+                                                <TextBlock Text="{Binding WhenText}" Style="{StaticResource CaptionText}" Margin="0,2,0,0" />
+                                            </StackPanel>
+
+                                            <TextBlock Grid.Column="2" Text="{Binding SizeText}"
+                                                       Style="{StaticResource BodyText}"
+                                                       Foreground="{StaticResource TextSecondaryBrush}"
+                                                       VerticalAlignment="Center" Margin="10,0,0,0" />
+                                        </Grid>
+                                    </Button>
+                                </DataTemplate>
+                            </ItemsControl.ItemTemplate>
+                        </ItemsControl>
+
+                        <TextBlock x:Name="RecentEmpty"
+                                   Text="{loc:Tr Key=RecentEmpty}"
+                                   Style="{StaticResource CaptionText}"
+                                   TextWrapping="Wrap"
+                                   Margin="0,16,0,0"
+                                   Visibility="Collapsed" />
+                    </StackPanel>
+                </Border>
+            </Grid>
+        </StackPanel>
+    </ScrollViewer>
 </UserControl>

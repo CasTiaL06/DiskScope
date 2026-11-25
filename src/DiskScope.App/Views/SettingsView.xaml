@@ -1,0 +1,122 @@
+<UserControl x:Class="DiskScope.App.Views.SettingsView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:loc="clr-namespace:DiskScope.App.Localization">
+
+    <ScrollViewer VerticalScrollBarVisibility="Auto">
+        <StackPanel Margin="32,28,32,28" MaxWidth="980" HorizontalAlignment="Left">
+
+            <TextBlock Text="{loc:Tr Key=NavigationSettings}" Style="{StaticResource DisplayText}" />
+
+            <!-- Language -->
+            <Border Style="{StaticResource CardStyle}" Padding="24" Margin="0,22,0,16">
+                <StackPanel>
+                    <TextBlock Text="{loc:Tr Key=SettingsLanguage}" Style="{StaticResource SubtitleText}" />
+                    <TextBlock Text="{loc:Tr Key=SettingsLanguageDesc}"
+                               Style="{StaticResource CaptionText}" Margin="0,4,0,14" />
+
+                    <StackPanel Orientation="Horizontal">
+                        <RadioButton x:Name="LangTurkish" GroupName="Lang" Style="{StaticResource ChoiceChip}"
+                                     Content="{loc:Tr Key=LanguageTurkish}" Checked="Language_Checked" />
+                        <RadioButton x:Name="LangEnglish" GroupName="Lang" Style="{StaticResource ChoiceChip}"
+                                     Content="{loc:Tr Key=LanguageEnglish}" Checked="Language_Checked" />
+                    </StackPanel>
+                </StackPanel>
+            </Border>
+
+            <!-- Background -->
+            <Border Style="{StaticResource CardStyle}" Padding="24" Margin="0,0,0,16">
+                <StackPanel>
+                    <TextBlock Text="{loc:Tr Key=SettingsBackground}" Style="{StaticResource SubtitleText}" />
+                    <TextBlock Text="{loc:Tr Key=SettingsBackgroundDesc}"
+                               Style="{StaticResource CaptionText}" TextWrapping="Wrap" Margin="0,4,0,16" />
+
+                    <ItemsControl x:Name="BackgroundList">
+                        <ItemsControl.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <WrapPanel />
+                            </ItemsPanelTemplate>
+                        </ItemsControl.ItemsPanel>
+
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate>
+                                <Button Style="{StaticResource GhostButton}"
+                                        Padding="0"
+                                        Margin="0,0,14,14"
+                                        Click="BackgroundOption_Click">
+                                    <StackPanel Width="230">
+                                        <Border Height="86" CornerRadius="12" BorderThickness="2">
+                                            <Border.Style>
+                                                <Style TargetType="Border">
+                                                    <Setter Property="BorderBrush" Value="{StaticResource BorderBrush}" />
+                                                    <Style.Triggers>
+                                                        <DataTrigger Binding="{Binding IsSelected}" Value="True">
+                                                            <Setter Property="BorderBrush" Value="{StaticResource AccentBrush}" />
+                                                        </DataTrigger>
+                                                    </Style.Triggers>
+                                                </Style>
+                                            </Border.Style>
+                                            <Border.Background>
+                                                <ImageBrush ImageSource="{Binding Preview}" Stretch="UniformToFill" AlignmentX="Right" />
+                                            </Border.Background>
+                                        </Border>
+
+                                        <StackPanel Orientation="Horizontal" Margin="4,8,0,0">
+                                            <TextBlock Text="{Binding DisplayName}" Style="{StaticResource BodyText}" />
+                                            <TextBlock Text="&#xE73E;" FontFamily="{StaticResource IconFont}" FontSize="13"
+                                                       Foreground="{StaticResource AccentBrush}"
+                                                       VerticalAlignment="Center" Margin="8,0,0,0">
+                                                <TextBlock.Style>
+                                                    <Style TargetType="TextBlock">
+                                                        <Setter Property="Visibility" Value="Collapsed" />
+                                                        <Style.Triggers>
+                                                            <DataTrigger Binding="{Binding IsSelected}" Value="True">
+                                                                <Setter Property="Visibility" Value="Visible" />
+                                                            </DataTrigger>
+                                                        </Style.Triggers>
+                                                    </Style>
+                                                </TextBlock.Style>
+                                            </TextBlock>
+                                        </StackPanel>
+                                    </StackPanel>
+                                </Button>
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                    </ItemsControl>
+
+                    <StackPanel Orientation="Horizontal" Margin="0,4,0,0">
+                        <Button Style="{StaticResource PrimaryButton}"
+                                Content="{loc:Tr Key=BackgroundUpload}"
+                                Click="Upload_Click"
+                                Margin="0,0,8,0" />
+                        <Button Style="{StaticResource SecondaryButton}"
+                                Content="{loc:Tr Key=BackgroundReset}"
+                                Click="Reset_Click" />
+                    </StackPanel>
+
+                    <TextBlock x:Name="BackgroundStatusText"
+                               Style="{StaticResource CaptionText}"
+                               Foreground="{StaticResource WarningBrush}"
+                               TextWrapping="Wrap"
+                               Margin="0,12,0,0"
+                               Visibility="Collapsed" />
+                </StackPanel>
+            </Border>
+
+            <!-- Data location (portable) -->
+            <Border Style="{StaticResource CardStyle}" Padding="24">
+                <StackPanel>
+                    <TextBlock Text="{loc:Tr Key=SettingsData}" Style="{StaticResource SubtitleText}" />
+                    <TextBlock x:Name="DataPathText"
+                               Style="{StaticResource CaptionText}"
+                               TextWrapping="Wrap"
+                               Margin="0,4,0,14" />
+                    <Button Style="{StaticResource SecondaryButton}"
+                            Content="{loc:Tr Key=SettingsOpenFolder}"
+                            HorizontalAlignment="Left"
+                            Click="OpenDataFolder_Click" />
+                </StackPanel>
+            </Border>
+        </StackPanel>
+    </ScrollViewer>
+</UserControl>

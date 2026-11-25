@@ -1,4 +1,6 @@
-# DiskScope – Tasarım Belgesi, Mimari ve Geliştirme Planı
+# NexDisk (eski adıyla DiskScope) – Tasarım Belgesi, Mimari ve Geliştirme Planı
+
+> Marka notu: Uygulama NexDisk adıyla yayınlanır. Kod tabanındaki proje ve ad alanı adları (DiskScope.*) mimariyi korumak için değiştirilmemiştir.
 
 Durum: **GENEL PLAN ONAYLANDI** – Faz 1 görev planı onayı bekleniyor (kodlama başlamadı)
 Sürüm: 0.2 (kullanıcı tercihleri işlendi)

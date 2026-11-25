@@ -1,4 +1,4 @@
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Media;
 using DiskScope.App.Localization;
 using DiskScope.Scanning;
@@ -26,12 +26,12 @@ public static class CategoryPalette
     private static readonly Dictionary<Color, LinearGradientBrush> TileCache = new();
 
     /// <summary>Klasör simgeleri için sakin gri-mavi ton.</summary>
-    public static SolidColorBrush FolderIconBrush { get; } = Frozen(new SolidColorBrush(Color.FromRgb(0x8B, 0x98, 0xA6)));
+    public static SolidColorBrush FolderIconBrush { get; } = Frozen(new SolidColorBrush(Color.FromRgb(0x7C, 0x8B, 0xB5)));
 
     /// <summary>Klasör satırlarındaki yüzde çubuğu (vurgu rengi).</summary>
-    public static SolidColorBrush FolderBarBrush { get; } = Frozen(new SolidColorBrush(Color.FromRgb(0x2B, 0xB3, 0xC0)));
+    public static SolidColorBrush FolderBarBrush { get; } = Frozen(new SolidColorBrush(Color.FromRgb(0x4C, 0x8D, 0xFF)));
 
-    public static SolidColorBrush SmallFilesBrush { get; } = Frozen(new SolidColorBrush(Color.FromRgb(0x5B, 0x66, 0x70)));
+    public static SolidColorBrush SmallFilesBrush { get; } = Frozen(new SolidColorBrush(Color.FromRgb(0x4A, 0x55, 0x78)));
 
     public static Color GetColor(FileCategory category) =>
         Colors.TryGetValue(category, out var color) ? color : Colors[FileCategory.Other];

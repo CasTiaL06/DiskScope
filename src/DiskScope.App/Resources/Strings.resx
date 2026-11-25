@@ -5,14 +5,12 @@
   <resheader name="reader"><value>System.Resources.ResXResourceReader, System.Windows.Forms</value></resheader>
   <resheader name="writer"><value>System.Resources.ResXResourceWriter, System.Windows.Forms</value></resheader>
 
-  <data name="AppTitle" xml:space="preserve"><value>DiskScope</value></data>
+  <data name="AppTitle" xml:space="preserve"><value>NexDisk</value></data>
 
   <data name="Workspace" xml:space="preserve"><value>ÇALIŞMA ALANI</value></data>
   <data name="NavigationOverview" xml:space="preserve"><value>Genel Bakış</value></data>
   <data name="NavigationAnalyzer" xml:space="preserve"><value>Disk Analizi</value></data>
-  <data name="NavigationLargeFiles" xml:space="preserve"><value>Büyük Dosyalar</value></data>
   <data name="NavigationFileTypes" xml:space="preserve"><value>Dosya Türleri</value></data>
-  <data name="NavigationSettings" xml:space="preserve"><value>Ayarlar</value></data>
 
   <data name="OverviewDescription" xml:space="preserve"><value>Depolama alanınızı tek bakışta takip edin.</value></data>
   <data name="StorageOverview" xml:space="preserve"><value>Depolama Özeti</value></data>
@@ -89,4 +87,69 @@
   <data name="OverviewTotalCapacity" xml:space="preserve"><value>Toplam kapasite</value></data>
   <data name="OverviewUsedSpace" xml:space="preserve"><value>Kullanılan alan</value></data>
   <data name="OverviewFreeSpace" xml:space="preserve"><value>Boş alan</value></data>
+  <data name="BrandTagline" xml:space="preserve"><value>Depolama alanınızı keşfedin, yönetin.</value></data>
+  <data name="OverviewDrives" xml:space="preserve"><value>Diskler</value></data>
+  <data name="CardDiskUsage" xml:space="preserve"><value>Disk Kullanımı</value></data>
+  <data name="CardUsageHistory" xml:space="preserve"><value>Son 7 Günün Disk Kullanımı</value></data>
+  <data name="CardTopFolders" xml:space="preserve"><value>En Çok Yer Kaplayan Klasörler</value></data>
+  <data name="CardDiskHealth" xml:space="preserve"><value>Disk Sağlığı</value></data>
+  <data name="CardRecentScans" xml:space="preserve"><value>Son Analizler</value></data>
+  <data name="LinkSeeAll" xml:space="preserve"><value>Tümünü Gör →</value></data>
+  <data name="LegendEmpty" xml:space="preserve"><value>Dosya türü dağılımını görmek için bir disk analiz edin.</value></data>
+  <data name="LegendSource" xml:space="preserve"><value>Kaynak: {0} taraması · {1}</value></data>
+  <data name="ChartCollecting" xml:space="preserve"><value>Grafik, uygulamayı her kullandığınızda günlük doluluk kaydı ekleyerek oluşur. En az iki gün gerekli.</value></data>
+  <data name="TopFoldersEmpty" xml:space="preserve"><value>Klasör boyutlarını görmek için bir disk analiz edin.</value></data>
+  <data name="RecentEmpty" xml:space="preserve"><value>Henüz bir analiz yapılmadı.</value></data>
+  <data name="PercentFormat" xml:space="preserve"><value>%{0:0.0}</value></data>
+  <data name="PercentWhole" xml:space="preserve"><value>%{0:0}</value></data>
+  <data name="TemperatureFormat" xml:space="preserve"><value>{0} °C</value></data>
+  <data name="HoursFormat" xml:space="preserve"><value>{0:N0} saat</value></data>
+  <data name="HealthHealthy" xml:space="preserve"><value>Sağlıklı</value></data>
+  <data name="HealthWarning" xml:space="preserve"><value>Uyarı</value></data>
+  <data name="HealthUnhealthy" xml:space="preserve"><value>Sorunlu</value></data>
+  <data name="HealthUnknown" xml:space="preserve"><value>Bilinmiyor</value></data>
+  <data name="HealthUnavailable" xml:space="preserve"><value>Sağlık bilgisi bu bilgisayarda okunamadı.</value></data>
+  <data name="HealthNeedsAdmin" xml:space="preserve"><value>Bu bilgi bazı disklerde yalnızca yönetici izniyle okunabilir.</value></data>
+  <data name="DateToday" xml:space="preserve"><value>Bugün • {0}</value></data>
+  <data name="DateYesterday" xml:space="preserve"><value>Dün • {0}</value></data>
+  <data name="DateDaysAgo" xml:space="preserve"><value>{0} gün önce</value></data>
+  <data name="NavigationHealth" xml:space="preserve"><value>Disk Sağlığı</value></data>
+  <data name="NavigationHistory" xml:space="preserve"><value>Tarama Geçmişi</value></data>
+  <data name="NavigationSettings" xml:space="preserve"><value>Ayarlar</value></data>
+  <data name="NavigationAbout" xml:space="preserve"><value>Hakkında</value></data>
+  <data name="NavigationLargeFiles" xml:space="preserve"><value>Büyük Dosyalar</value></data>
+  <data name="NavigationDuplicates" xml:space="preserve"><value>Yinelenen Dosyalar</value></data>
+  <data name="NavigationSoon" xml:space="preserve"><value>Yakında</value></data>
+  <data name="HealthPageDesc" xml:space="preserve"><value>Fiziksel disklerinizin Windows tarafından bildirilen sağlık durumu.</value></data>
+  <data name="HealthTemperature" xml:space="preserve"><value>Sıcaklık</value></data>
+  <data name="HealthPowerOn" xml:space="preserve"><value>Çalışma süresi</value></data>
+  <data name="HealthEmpty" xml:space="preserve"><value>Disk sağlığı bilgisi okunamadı. Bu bilgi bazı bilgisayarlarda veya sanal makinelerde bulunmaz.</value></data>
+  <data name="HistoryDesc" xml:space="preserve"><value>Tamamlanan analizleriniz. Yalnızca bu bilgisayarda saklanır.</value></data>
+  <data name="HistoryClear" xml:space="preserve"><value>Geçmişi temizle</value></data>
+  <data name="HistoryClearConfirm" xml:space="preserve"><value>Tarama geçmişi silinsin mi? Disklerinizdeki dosyalara dokunulmaz.</value></data>
+  <data name="HistoryEmpty" xml:space="preserve"><value>Henüz tamamlanmış bir analiz yok.</value></data>
+  <data name="HistoryDetail" xml:space="preserve"><value>{0:N0} dosya · {1:N0} klasör · {2}</value></data>
+  <data name="HistoryReanalyze" xml:space="preserve"><value>Tekrar analiz et</value></data>
+  <data name="SettingsLanguage" xml:space="preserve"><value>Dil</value></data>
+  <data name="SettingsLanguageDesc" xml:space="preserve"><value>Arayüz dilini seçin. Değişiklik hemen uygulanır.</value></data>
+  <data name="LanguageTurkish" xml:space="preserve"><value>Türkçe</value></data>
+  <data name="LanguageEnglish" xml:space="preserve"><value>English</value></data>
+  <data name="SettingsBackground" xml:space="preserve"><value>Arka plan</value></data>
+  <data name="SettingsBackgroundDesc" xml:space="preserve"><value>Genel Bakış üst bölümünde görünen görseli seçin veya kendi görselinizi yükleyin. Seçiminiz kaydedilir.</value></data>
+  <data name="BackgroundNeonPlatter" xml:space="preserve"><value>Neon Disk</value></data>
+  <data name="BackgroundAurora" xml:space="preserve"><value>Aurora</value></data>
+  <data name="BackgroundGrid" xml:space="preserve"><value>Neon Izgara</value></data>
+  <data name="BackgroundWaves" xml:space="preserve"><value>Dalgalar</value></data>
+  <data name="BackgroundCustom" xml:space="preserve"><value>Kendi görselin</value></data>
+  <data name="BackgroundUpload" xml:space="preserve"><value>Görsel yükle…</value></data>
+  <data name="BackgroundReset" xml:space="preserve"><value>Varsayılana dön</value></data>
+  <data name="BackgroundFilter" xml:space="preserve"><value>Görseller</value></data>
+  <data name="BackgroundErrorFormat" xml:space="preserve"><value>Desteklenen biçimler: JPG, PNG, BMP.</value></data>
+  <data name="BackgroundErrorSize" xml:space="preserve"><value>Görsel çok büyük (en fazla 25 MB).</value></data>
+  <data name="BackgroundErrorInvalid" xml:space="preserve"><value>Bu görsel açılamadı. Başka bir dosya deneyin.</value></data>
+  <data name="SettingsData" xml:space="preserve"><value>Veri konumu</value></data>
+  <data name="SettingsOpenFolder" xml:space="preserve"><value>Klasörü aç</value></data>
+  <data name="AboutVersion" xml:space="preserve"><value>Sürüm {0}</value></data>
+  <data name="AboutLicense" xml:space="preserve"><value>MIT Lisansı ile açık kaynak</value></data>
+  <data name="AboutGitHub" xml:space="preserve"><value>GitHub'da görüntüle</value></data>
 </root>

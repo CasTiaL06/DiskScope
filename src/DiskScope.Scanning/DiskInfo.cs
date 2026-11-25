@@ -13,6 +13,9 @@ public sealed class DiskInfo
 
     public string FileSystem { get; init; } = string.Empty;
 
+    /// <summary>Sürücünün bulunduğu fiziksel disk numarası (belirlenemezse null).</summary>
+    public int? DiskNumber { get; init; }
+
     public long TotalSize { get; init; }
 
     public long AvailableFreeSpace { get; init; }

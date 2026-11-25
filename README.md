@@ -1,38 +1,40 @@
-<p align="center"><img src="docs/logo.png" alt="DiskScope" width="110"></p>
+<p align="center"><img src="docs/logo.png" alt="NexDisk" width="110"></p>
 
-# DiskScope
+# NexDisk
 
-**TR:** Windows için geliştirilen, taşınabilir (portable) bir disk ve depolama alanı analiz uygulaması.
-**EN:** A portable disk and storage analyzer for Windows.
+**TR:** Windows için modern, taşınabilir (portable) bir disk ve depolama alanı analiz uygulaması.
+**EN:** A modern, portable disk and storage analyzer for Windows.
 
-> **Durum / Status:** Erken geliştirme aşaması (v0.x). Genel Bakış ve Disk Analizi (treemap) çalışıyor; yinelenen dosyalar, temizlik merkezi ve diğer modüller yol haritasında.
-> Early development (v0.x). Overview and Disk Analyzer (treemap) work; duplicate finder, cleanup center and other modules are on the roadmap.
+> **Durum / Status:** Erken geliştirme aşaması (v0.x). Genel Bakış, Disk Analizi (treemap), Disk Sağlığı, Tarama Geçmişi ve Ayarlar çalışıyor; Büyük Dosyalar, Yinelenen Dosyalar ve Temizlik Merkezi yol haritasında.
+> Early development (v0.x). Overview, Disk Analyzer (treemap), Disk Health, Scan History and Settings work; Large Files, Duplicate Finder and Cleanup Center are on the roadmap.
 
 [![CI](https://github.com/CasTiaL06/DiskScope/actions/workflows/ci.yml/badge.svg)](https://github.com/CasTiaL06/DiskScope/actions/workflows/ci.yml)
 
 ## Özellikler (şu an) / Features (current)
 
-- **Genel Bakış:** bilgisayardaki diskler; kapasite, kullanılan/boş alan, doluluk yüzdesi, dosya sistemi ve gerçek disk türü (**SSD, HDD, NVMe**; emin olunamazsa **Bilinmiyor**)
+- **Genel Bakış:** toplam/kullanılan/boş alan, disk başına doluluk halkası, kategori dağılımı, en çok yer kaplayan klasörler, disk sağlığı özeti, son analizler ve son 7 günün doluluk grafiği
 - **Disk Analizi:** disk veya klasörü arka planda tarar (iptal edilebilir, ilerleme gösterir); erişilemeyen klasörler raporlanır
-- **Treemap:** klasör ve dosya boyutlarını iç içe ve dosya uzantısına göre renkli gösterir; üzerine gelince bilgi kartı, tıklayınca seçim, çift tıklayınca içeri girme, sağ tık menüsü (Explorer'da göster, yolu kopyala)
-- Klasör listesi (boyut ve yüzde çubuğu), yol çubuğu (breadcrumb), dosya türü dağılımı ve en büyük uzantılar
-- Türkçe ve İngilizce arayüz, yeniden başlatmadan dil değiştirme
-- Koyu temalı, modern bir tasarım: halka grafikli disk kartları, yumuşak geçiş animasyonları, uygulama simgesi
-- Taşınabilir: ayarlar ve günlükler uygulamanın yanındaki `Data` klasöründe tutulur
-- Hata günlüğü (Serilog) ve beklenmeyen hatalarda uygulamanın çökmemesi
+- **Treemap:** klasör ve dosya boyutlarını iç içe ve dosya uzantısına göre renkli gösterir; üzerine gelince bilgi kartı, tıklayınca seçim, çift tıklayınca içeri girme, sağ tık menüsü
+- **Disk Sağlığı:** Windows'un bildirdiği sağlık durumu; sıcaklık ve çalışma süresi okunabiliyorsa gösterilir (bazı disklerde yönetici izni gerekir, okunamazsa uydurulmaz)
+- **Tarama Geçmişi:** tamamlanan analizler kalıcı saklanır, tek tıkla tekrar analiz edilebilir
+- **Ayarlar:** Türkçe/İngilizce dil, Genel Bakış arka planı (hazır görseller veya kendi görselin; seçim kalıcıdır), veri klasörü
+- Koyu, mavi-mor neon temalı modern tasarım ve yumuşak animasyonlar
+- **Taşınabilir:** ayarlar, geçmiş ve günlükler uygulamanın yanındaki `Data` klasöründe tutulur
+
+**Gerçek veri ilkesi:** Hiçbir ekranda örnek veri yoktur. Veri yoksa (örneğin henüz analiz yapılmadıysa) bunu açıkça söyleyen boş durum gösterilir. Doluluk grafiği, uygulamayı kullandıkça günlük kayıtla oluşur.
 
 **Bilinen sınırlar:** boyutlar dosyaların mantıksal boyutudur (diskte kapladığı alan değil); klasör bağlantıları (junction/symlink) takip edilmez; 256 KB'den küçük dosyalar klasör başına tek blok olarak gösterilir (bellek kontrolü için).
 
 ## Yol haritası / Roadmap
 
-Büyük dosyalar listesi · Tarama sırasında duraklatma · Yinelenen dosya bulucu · Temizlik merkezi (yalnızca kullanıcı onayıyla, Geri Dönüşüm Kutusu'na) · Geçmiş ve dışa aktarma · Açık tema
+Büyük dosyalar listesi · Tarama sırasında duraklatma · Yinelenen dosya bulucu · Temizlik merkezi (yalnızca kullanıcı onayıyla, Geri Dönüşüm Kutusu'na) · Dışa aktarma · Açık tema
 
 Ayrıntılar: [`docs/DiskScope-Design-and-Plan.md`](docs/DiskScope-Design-and-Plan.md)
 
 ## Kurulum (kullanıcılar) / Install (users)
 
-1. [Releases](../../releases) sayfasından en son `DiskScope-vX.Y.Z-win-x64-portable.zip` dosyasını indirin.
-2. Zip'i bir klasöre çıkarın ve `DiskScope.exe` dosyasını çalıştırın. Kurulum ve .NET gerekmez.
+1. [Releases](../../releases) sayfasından en son `NexDisk-vX.Y.Z-win-x64-portable.zip` dosyasını indirin.
+2. Zip'i bir klasöre çıkarın ve `NexDisk.exe` dosyasını çalıştırın. Kurulum ve .NET gerekmez.
 3. Ayarlar ve günlükler aynı klasördeki `Data` klasörüne yazılır. Klasör yazılamıyorsa `%LOCALAPPDATA%\DiskScope\Data` kullanılır.
 
 > Uygulama henüz imzalı değildir; Windows SmartScreen uyarı gösterebilir.
@@ -50,26 +52,28 @@ dotnet run --project src\DiskScope.App
 Taşınabilir sürümü yerelde üretmek için:
 
 ```powershell
-dotnet publish src\DiskScope.App\DiskScope.App.csproj -c Release -r win-x64 --self-contained true -p:PublishSingleFile=true -p:IncludeNativeLibrariesForSelfExtract=true -o publish
+dotnet publish src\DiskScope.App\DiskScope.App.csproj -c Release -r win-x64 --self-contained true -p:PublishSingleFile=true -p:IncludeNativeLibrariesForSelfExtract=true -p:EnableCompressionInSingleFile=true -o publish
 ```
 
 ## Proje yapısı / Structure
 
 | Proje | Görev |
 |---|---|
-| `src/DiskScope.Core` | Temel arayüzler, treemap yerleşim algoritması, boyut biçimlendirme |
-| `src/DiskScope.Scanning` | Disk algılama, SSD/HDD tespiti, klasör tarama motoru |
-| `src/DiskScope.Storage` | Ayarlar, taşınabilir yol çözümleme, günlükleme |
-| `src/DiskScope.App` | WPF masaüstü uygulaması |
+| `src/DiskScope.Core` | Temel modeller, treemap yerleşim algoritması, boyut biçimlendirme, geçmiş mantığı |
+| `src/DiskScope.Scanning` | Disk algılama, SSD/HDD tespiti, disk sağlığı, klasör tarama motoru |
+| `src/DiskScope.Storage` | Ayarlar, geçmiş kayıtları, taşınabilir yol çözümleme, günlükleme |
+| `src/DiskScope.App` | WPF masaüstü uygulaması (NexDisk.exe) |
 | `tests/` | Birim ve entegrasyon testleri |
+
+> Proje ve ad alanı adları (`DiskScope.*`) mimariyi korumak için değiştirilmedi; ürün adı NexDisk'tir.
 
 ## Sürüm yayınlama / Releasing
 
-`v0.1.0` gibi bir etiket gönderildiğinde GitHub Actions testleri çalıştırır, taşınabilir zip'i üretir ve Releases sayfasına ekler:
+`v0.2.0` gibi bir etiket gönderildiğinde GitHub Actions testleri çalıştırır, taşınabilir zip'i üretir ve Releases sayfasına ekler:
 
 ```powershell
-git tag v0.1.0
-git push origin v0.1.0
+git tag v0.2.0
+git push origin v0.2.0
 ```
 
 ## Lisans / License

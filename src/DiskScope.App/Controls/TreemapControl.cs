@@ -1,4 +1,4 @@
-using System.Globalization;
+﻿using System.Globalization;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
@@ -24,17 +24,17 @@ public sealed class TreemapControl : FrameworkElement
 
     private static readonly FontFamily Font = new("Segoe UI Variable Text, Segoe UI");
 
-    private static readonly Brush BackgroundBrush = Frozen(new SolidColorBrush(Color.FromRgb(0x14, 0x17, 0x1A)));
-    private static readonly Brush ContainerBrush = Frozen(new SolidColorBrush(Color.FromRgb(0x1B, 0x1F, 0x23)));
-    private static readonly Brush FolderBrush = Frozen(new SolidColorBrush(Color.FromRgb(0x27, 0x2D, 0x34)));
-    private static readonly Brush SmallFilesTileBrush = Frozen(new SolidColorBrush(Color.FromRgb(0x2D, 0x33, 0x3A)));
+    private static readonly Brush BackgroundBrush = Frozen(new SolidColorBrush(Color.FromRgb(0x0C, 0x10, 0x1E)));
+    private static readonly Brush ContainerBrush = Frozen(new SolidColorBrush(Color.FromRgb(0x11, 0x16, 0x2B)));
+    private static readonly Brush FolderBrush = Frozen(new SolidColorBrush(Color.FromRgb(0x1A, 0x21, 0x40)));
+    private static readonly Brush SmallFilesTileBrush = Frozen(new SolidColorBrush(Color.FromRgb(0x20, 0x28, 0x4A)));
     private static readonly Brush HoverOverlay = Frozen(new SolidColorBrush(Color.FromArgb(0x26, 0xFF, 0xFF, 0xFF)));
     private static readonly Brush LabelBrush = Frozen(new SolidColorBrush(Color.FromRgb(0xF5, 0xF7, 0xFA)));
     private static readonly Brush SubLabelBrush = Frozen(new SolidColorBrush(Color.FromArgb(0xC0, 0xF5, 0xF7, 0xFA)));
-    private static readonly Brush HeaderLabelBrush = Frozen(new SolidColorBrush(Color.FromRgb(0xA9, 0xB1, 0xB9)));
+    private static readonly Brush HeaderLabelBrush = Frozen(new SolidColorBrush(Color.FromRgb(0xA3, 0xAD, 0xCB)));
 
-    private static readonly Pen ContainerPen = Frozen(new Pen(new SolidColorBrush(Color.FromRgb(0x2C, 0x32, 0x38)), 1));
-    private static readonly Pen HoverPen = Frozen(new Pen(new SolidColorBrush(Color.FromRgb(0x2B, 0xB3, 0xC0)), 1.5));
+    private static readonly Pen ContainerPen = Frozen(new Pen(new SolidColorBrush(Color.FromRgb(0x22, 0x2A, 0x4A)), 1));
+    private static readonly Pen HoverPen = Frozen(new Pen(new SolidColorBrush(Color.FromRgb(0x4C, 0x8D, 0xFF)), 1.5));
     private static readonly Pen SelectionPen = Frozen(new Pen(new SolidColorBrush(Color.FromRgb(0xF1, 0xF3, 0xF5)), 2));
 
     public static readonly DependencyProperty RevealProperty = DependencyProperty.Register(
@@ -82,7 +82,7 @@ public sealed class TreemapControl : FrameworkElement
         {
             FontFamily = Font,
             FontSize = 11,
-            Foreground = new SolidColorBrush(Color.FromRgb(0x6C, 0x75, 0x7D)),
+            Foreground = new SolidColorBrush(Color.FromRgb(0x62, 0x6C, 0x8E)),
             Margin = new Thickness(0, 3, 0, 0),
             TextTrimming = TextTrimming.CharacterEllipsis
         };
@@ -94,8 +94,8 @@ public sealed class TreemapControl : FrameworkElement
 
         var card = new Border
         {
-            Background = new SolidColorBrush(Color.FromRgb(0x29, 0x2E, 0x33)),
-            BorderBrush = new SolidColorBrush(Color.FromRgb(0x3A, 0x41, 0x48)),
+            Background = new SolidColorBrush(Color.FromRgb(0x1C, 0x23, 0x40)),
+            BorderBrush = new SolidColorBrush(Color.FromRgb(0x34, 0x3E, 0x6B)),
             BorderThickness = new Thickness(1),
             CornerRadius = new CornerRadius(8),
             Padding = new Thickness(10, 8, 10, 8),
